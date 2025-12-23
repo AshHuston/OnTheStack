@@ -6,13 +6,13 @@ export class MtgCard {
 
         this.startWords = this._initStartWords();
         this.endWords = this._initEndWords();
-        console.log("START WORDS", this.startWords)
-        console.log("END WORDS", this.endWords)
+        // console.log("START WORDS", this.startWords)
+        // console.log("END WORDS", this.endWords)
     }
 
     _findFirstWords(firstWord) {
         let words = englishWords
-        const legalFirstWords = []
+        const legalFirstWords = [firstWord]
         for (let i=0; i<firstWord.length; i++){
             words = words.filter(d => d[i] === firstWord[i])
             for (let n=0; n<words.length; n++) {
@@ -24,7 +24,7 @@ export class MtgCard {
 
      _findLastWords(lastWord) {
         let words = englishWords
-        const legaLastWords = []
+        const legaLastWords = [lastWord]
         for (let i=1; i<=lastWord.length; i++){
             words = words.filter(d => d.slice(-i) === lastWord.slice(-i)); 
             for (let n=0; n<words.length; n++) {

@@ -55,11 +55,17 @@ async function fetchTopEdhrecCards(limit = 1000) {
 import { MtgCard } from './cardData.js';
 import { topEDHRcardnames } from './lists.js'
 
+const cardPool = []
+const testCard = new MtgCard("counterspell");
+console.log(testCard)
 topEDHRcardnames.forEach((e) => {
-  console.log(e)
+  //console.log(e)
   const card = new MtgCard(e);
-  console.log()
+  cardPool.push(card)
+  //console.log()
 });
+console.log(cardPool[11]==testCard)
 
+import generatePuzzle from "./generatePuzzle.js";
 
-
+console.log(generatePuzzle(5, cardPool))
