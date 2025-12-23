@@ -20,10 +20,10 @@ export default function generatePuzzle(numOfCards, cardPool, startCard, endCard)
 
     let puzzle = []//new Puzzle({})
     // random start card
-    const firstWord = startCard ?? cardPool[11]
-    // const firstWord = startCard ?? cardPool.length
-    //     ? cardPool[Math.floor(Math.random() * cardPool.length)]
-    //     : undefined;
+    //const firstWord = startCard ?? cardPool[11]
+    const firstWord = startCard ?? cardPool.length
+        ? cardPool[Math.floor(Math.random() * cardPool.length)]
+        : undefined;
     let prevWord = firstWord
 
     puzzle.push({
@@ -44,7 +44,8 @@ export default function generatePuzzle(numOfCards, cardPool, startCard, endCard)
         while(counter > -1) {
             const lookingAt = shuffledCardPool[counter]
             
-            console.log(counter)
+            //console.log(counter)
+            counter++
             for (let i=0; i<lookingAt.startWords.length; i++) {
                 // IMPROVE: vvv Add optional min length for connecting words.
                 if (prevWord.endWords.includes(lookingAt.startWords[i])) {
@@ -70,8 +71,8 @@ export default function generatePuzzle(numOfCards, cardPool, startCard, endCard)
                     counter = -1
                 }
             }
-            counter++
-            if (counter >= cardPool.length-1) { counter = -1 }
+            
+            if (counter >= shuffledCardPool.length-1) { counter = -1 }
         }
         if (puzzle.length < numOfCards && hasNotAddedACard) { 
             console.log('recursing...'); 

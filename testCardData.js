@@ -16,6 +16,7 @@ async function fetchTopEdhrecCards(limit = 1000) {
     const data = await response.json();
 
     // Add cards from this page
+    // console.log("Adding: ", data.name)
     cards.push(...data.data);
 
     // Move to next page if available
@@ -38,7 +39,7 @@ async function fetchTopEdhrecCards(limit = 1000) {
   topCards.forEach((card, index) => {
     console.log(
       //`${index + 1}. ${card.name} (EDHREC rank: ${card.edhrec_rank})`
-      `'${card.name}',`
+      `'${card.name.replace("'", "\\'")}',`
     );
   });
 })();
