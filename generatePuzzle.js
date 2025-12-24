@@ -18,15 +18,14 @@ export default function generatePuzzle(numOfCards, cardPool, startCard, endCard)
         throw new Error(`${endCard} not in cardpool`);
     }
 
-    let puzzle = []//new Puzzle({})
-    // random start card
-    //const firstWord = startCard ?? cardPool[11]
+    let puzzle = new Puzzle({}) // Still need to finish refactoring this logic and that in puzzle.js to get it to work with an object rather than an array
+
     const firstWord = startCard ?? cardPool.length
         ? cardPool[Math.floor(Math.random() * cardPool.length)]
         : undefined;
     let prevWord = firstWord
 
-    puzzle.push({
+    puzzle.addCard({
         isFirstWord: true,
         isLastWord: false,
         topConnector: "",
@@ -35,22 +34,21 @@ export default function generatePuzzle(numOfCards, cardPool, startCard, endCard)
     })
 
     // find all cards that have any matching start words to that end word
-    while (puzzle.length < numOfCards) {
-        let  shuffledCardPool = shuffledClone(cardPool)
-        shuffledCardPool = shuffledCardPool.filter(e => !puzzle.some(p => p.cardname == e.cardname))
+    while (puzzle.words.length < numOfCards) {
+        const  shuffledCardPool = shuffledClone(cardPool).filter(e => !puzzle.words.some(p => p.cardname == e.cardname))
+        //console.log(shuffledCardPool[0])
         console.log("LENGTH:", shuffledCardPool.length)
         let counter = 0
         let hasNotAddedACard = true
         while(counter > -1) {
             const lookingAt = shuffledCardPool[counter]
-            
+
             //console.log(counter)
             counter++
             for (let i=0; i<lookingAt.startWords.length; i++) {
-                // IMPROVE: vvv Add optional min length for connecting words.
                 if (prevWord.endWords.includes(lookingAt.startWords[i])) {
                     // Add next step
-                    puzzle.push({
+                    puzzle.addCard({
                         isFirstWord: false,
                         isLastWord: false,
                         topConnector: lookingAt.startWords[i],
@@ -58,8 +56,9 @@ export default function generatePuzzle(numOfCards, cardPool, startCard, endCard)
                         bottomConnector: ""
                     })
 
+                    // IMPROVE: Have this audit happen in the Puzzle object automatiaclly. DONE!
                     // Audit previous word
-                    puzzle.at(-2).bottomConnector = puzzle.at(-1).topConnector
+                    // puzzle.at(-2).bottomConnector = puzzle.at(-1).topConnector
 
                     // Set as prevCard
                     prevWord = lookingAt
@@ -71,14 +70,15 @@ export default function generatePuzzle(numOfCards, cardPool, startCard, endCard)
                     counter = -1
                 }
             }
-            
+
             if (counter >= shuffledCardPool.length-1) { counter = -1 }
         }
-        if (puzzle.length < numOfCards && hasNotAddedACard) { 
+        //IMPROVE: Should include some kind of safeguard for retries.
+        if (puzzle.words.length < numOfCards && hasNotAddedACard) { 
             console.log('recursing...'); 
             return generatePuzzle(numOfCards, cardPool, startCard, endCard) }
     }
-    puzzle.at(-1).isLastWord = true
+    puzzle.words.at(-1).isLastWord = true
 
     return puzzle
 }

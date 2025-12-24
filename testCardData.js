@@ -37,21 +37,21 @@ async function fetchTopEdhrecCards(limit = 1000) {
 
   // Example: log name + EDHREC rank
   topCards.forEach((card, index) => {
-    console.log(
-      //`${index + 1}. ${card.name} (EDHREC rank: ${card.edhrec_rank})`
-      `'${card.name.replace("'", "\\'")}',`
-    );
+    if (card.card_faces){
+      console.log(
+        `'${card.card_faces[0].name.replace("'", "\\'")}',`
+      );
+    }
+    else {
+      console.log(
+        //`${index + 1}. ${card.name} (EDHREC rank: ${card.edhrec_rank})`
+        `'${card.name.replace("'", "\\'")}',`
+      );
+    }
   });
 })();
 
-
-
-
-
-
-
-
-
+// -------------------------------------------------------------------------------------------------- //
 
 import { MtgCard } from './cardData.js';
 import { topEDHRcardnames } from './lists.js'
@@ -69,4 +69,18 @@ console.log(cardPool[11]==testCard)
 
 import generatePuzzle from "./generatePuzzle.js";
 
-console.log(generatePuzzle(5, cardPool))
+console.log(generatePuzzle(4, cardPool))
+
+
+// -------------------------------------------------------------------------------------------------- //
+
+// import { Puzzle } from "./puzzle.js";
+
+// const words = [
+//   'test',
+//   'Nott, the brave',
+//   'Hello, sir!',
+//   'my-name-is-horatio'
+// ]
+// const myPuzz = new Puzzle({length: 4, words})
+// console.log(myPuzz.characterMaps)

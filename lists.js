@@ -1,3 +1,17 @@
+export const wordBlacklist = [
+    "tor",
+    "tain",
+    "res",
+    "hin",
+    "bor",
+    "ens",
+    "rit",
+    "eld",
+    // "",
+    // "",
+    // "",
+]
+
 export const topEDHRcardnames = [
     'Sol Ring',
     'Command Tower',
