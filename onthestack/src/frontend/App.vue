@@ -8,7 +8,7 @@ import Puzzle from './components/puzzle/Puzzle.vue'
 <template>
   <h1>Puzzle</h1>
   <div>
-
+    <Puzzle/>
   </div>
 </template>
 

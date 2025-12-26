@@ -1,13 +1,33 @@
 <script setup>
 import { usePuzzleStore } from '@/stores/puzzle'
+import HighlightedCardname from './HighlightedString.vue'
 
+const puzzleStore = usePuzzleStore()
 const props = defineProps({
-  index: number,
+  index: Number,
+  cardData: Object,
+  isSolved: Boolean
 })
 
-const puzzle = usePuzzleStore.puzzle
+import { ref } from 'vue'
+
+const text = ref('')
+
+const {
+        cardname,
+        blankMap,
+        isFirstWord,
+        isLastWord,
+        bottomConnector,
+        topConnector
+    } = props.cardData
+
 </script>
 
 <template>
-  <div>{{index}}</div>
+  <HighlightedCardname 
+    :text="isSolved ? cardname : blankMap"
+    :start="topConnector"
+    :end="bottomConnector"
+  />
 </template>

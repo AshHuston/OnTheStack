@@ -8,7 +8,8 @@ export const testPuzzle = {
       topConnector: '',
       cardname: "tezzeret's gambit",
       bottomConnector: 'bit',
-      blankMap: "________'_ ______"
+      blankMap: "________'_ ______",
+      isSolved: true
     },
     {
       isFirstWord: false,
@@ -16,7 +17,8 @@ export const testPuzzle = {
       topConnector: 'bit',
       cardname: 'bitterblossom',
       bottomConnector: 'blossom',
-      blankMap: '_____________'
+      blankMap: '_____________',
+      isSolved: false
     },
     {
       isFirstWord: false,
@@ -24,7 +26,8 @@ export const testPuzzle = {
       topConnector: 'blossom',
       cardname: 'blossoming bogbeast',
       bottomConnector: 'beast',
-      blankMap: '__________ ________'
+      blankMap: '__________ ________',
+      isSolved: false
     },
     {
       isFirstWord: false,
@@ -32,7 +35,8 @@ export const testPuzzle = {
       topConnector: 'beast',
       cardname: 'beast whisperer',
       bottomConnector: '',
-      blankMap: '_____ _________'
+      blankMap: '_____ _________',
+      isSolved: false
     }
   ]
 }
