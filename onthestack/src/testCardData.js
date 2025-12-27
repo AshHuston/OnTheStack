@@ -69,7 +69,7 @@ console.log(cardPool[11]==testCard)
 
 import generatePuzzle from "./backend/generatePuzzle.js";
 
-console.log(generatePuzzle(4, cardPool))
+console.log(generatePuzzle(6, cardPool))
 
 
 // -------------------------------------------------------------------------------------------------- //

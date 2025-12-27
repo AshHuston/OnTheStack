@@ -7,8 +7,8 @@ export const wordBlacklist = [
     "ens",
     "rit",
     "eld",
-    // "",
-    // "",
+    "ger",
+    "kas",
     // "",
 ]
 

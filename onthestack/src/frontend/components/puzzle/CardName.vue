@@ -13,21 +13,12 @@ import { ref } from 'vue'
 
 const text = ref('')
 
-const {
-        cardname,
-        blankMap,
-        isFirstWord,
-        isLastWord,
-        bottomConnector,
-        topConnector
-    } = props.cardData
-
 </script>
 
 <template>
   <HighlightedCardname 
-    :text="isSolved ? cardname : blankMap"
-    :start="topConnector"
-    :end="bottomConnector"
+    :text="isSolved ? props.cardData.cardname : props.cardData.blankMap"
+    :start="props.cardData.topConnector"
+    :end="props.cardData.bottomConnector"
   />
 </template>
