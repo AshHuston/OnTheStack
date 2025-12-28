@@ -1,15 +1,18 @@
 <script setup>
-import { onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import { usePuzzleStore } from '../../../stores/puzzle.js'
 import { testPuzzle } from '../../../backend/tempPuzzleObj.js'
 import CardName from './CardName.vue'
-import { ref } from 'vue'
 import { sanitizeString } from '../../../helpers.js'
 import { edhrecTopTwoTousand as cardPool } from "../../../edhrecTopTwoThousand.js";
 import generatePuzzle from "../../../backend/generatePuzzle.js";
+import '@awesome.me/webawesome/dist/components/input/input.js';
+import cardGuessField from './CardGuessField.vue'
 
 const guess = ref('')
 const puzzleStore = usePuzzleStore()
+const cardImageSrc = ref('https://m.media-amazon.com/images/I/61AGZ37D7eL.jpg')
+let showCardSuggestions = true // Temporary flag. Probably will be controlled by a setting or difficulty.
 
 puzzleStore.initialize(testPuzzle)
 
@@ -61,6 +64,13 @@ function giveHnt() {
     updatePuzzle()
 }
 
+async function findCardImage(cardname) {
+   const url = "https://api.scryfall.com/cards/named?fuzzy=" + sanitizeString(cardname)
+   const response = await fetch(url);
+   const data = await response.json();
+   cardImageSrc.value = data.image_uris.normal
+}
+
 </script>
 
 
@@ -76,20 +86,22 @@ function giveHnt() {
     
     <br/><br/>
     
-    <div>
-        <input
-            v-model="guess"
-            type="text"
-            placeholder="Type here..."
-        />
-        <br/><br/>
-    </div>
+    <cardGuessField v-model:guess="guess" :showCardSuggestions />
+
     <div>
         <button @click="newPuzzle()">Generate Puzzle</button>
         <br/><br/>
     </div>
     <div>
         <button @click="giveHnt()">Hint</button>
+        <br/><br/>
+    </div>
+    <div>
+        <button @click="findCardImage(guess)">Card Image</button>
+        <br/><br/>
+    </div>
+    <div>
+        <img style="height:150px" :src="cardImageSrc"/>
         <br/><br/>
     </div>
     Puzzle solved: {{puzzleSolved}}
