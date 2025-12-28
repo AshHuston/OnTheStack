@@ -14,7 +14,7 @@ export class Puzzle {
   }
 
   addCard({isFirstWord, isLastWord, topConnector, cardname, bottomConnector, isSolved = (isFirstWord)}) {
-    console.log(isFirstWord, isLastWord, topConnector, cardname, bottomConnector)
+    //console.log(isFirstWord, isLastWord, topConnector, cardname, bottomConnector)
     const blankMap = this._buildMap(cardname)
     if (!isFirstWord) { this.words.at(-1).bottomConnector = topConnector }
     this.words.push({isFirstWord, isLastWord, topConnector, cardname, bottomConnector, blankMap, isSolved})
@@ -36,7 +36,6 @@ export class Puzzle {
       "?",
       ":",
     ]
-    console.log(word)
     for (let l=0; l<word.length; l++) {
       if (charsToKeep.includes(word[l])) {
         map += word[l];

@@ -36,14 +36,10 @@ export default function generatePuzzle(numOfCards, cardPool, startCard, endCard)
     // find all cards that have any matching start words to that end word
     while (puzzle.words.length < numOfCards) {
         const  shuffledCardPool = shuffledClone(cardPool).filter(e => !puzzle.words.some(p => p.cardname == e.cardname))
-        //console.log(shuffledCardPool[0])
-        console.log("LENGTH:", shuffledCardPool.length)
         let counter = 0
         let hasNotAddedACard = true
         while(counter > -1) {
             const lookingAt = shuffledCardPool[counter]
-
-            //console.log(counter)
             counter++
             for (let i=0; i<lookingAt.startWords.length; i++) {
                 if (prevWord.endWords.includes(lookingAt.startWords[i])) {
@@ -75,7 +71,7 @@ export default function generatePuzzle(numOfCards, cardPool, startCard, endCard)
         }
         //IMPROVE: Should include some kind of safeguard for retries.
         if (puzzle.words.length < numOfCards && hasNotAddedACard) { 
-            console.log('recursing...'); 
+            //console.log('recursing...'); 
             return generatePuzzle(numOfCards, cardPool, startCard, endCard) }
     }
     puzzle.words.at(-1).isLastWord = true

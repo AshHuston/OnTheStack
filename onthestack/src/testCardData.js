@@ -32,41 +32,49 @@ async function fetchTopEdhrecCards(limit = 1000) {
 }
 
 // Example usage
-(async () => {
-  const topCards = await fetchTopEdhrecCards(0);
+// (async () => {
+//   const topCards = await fetchTopEdhrecCards(0);
 
-  // Example: log name + EDHREC rank
-  topCards.forEach((card, index) => {
-    if (card.card_faces){
-      console.log(
-        `'${card.card_faces[0].name.replace("'", "\\'")}',`
-      );
-    }
-    else {
-      console.log(
-        //`${index + 1}. ${card.name} (EDHREC rank: ${card.edhrec_rank})`
-        `'${card.name.replace("'", "\\'")}',`
-      );
-    }
-  });
-})();
+//   // Example: log name + EDHREC rank
+//   topCards.forEach((card, index) => {
+//     if (card.card_faces){
+//       console.log(
+//         `'${card.card_faces[0].name.replace("'", "\\'")}',`
+//       );
+//     }
+//     else {
+//       console.log(
+//         //`${index + 1}. ${card.name} (EDHREC rank: ${card.edhrec_rank})`
+//         `'${card.name.replace("'", "\\'")}',`
+//       );
+//     }
+//   });
+// })();
 
 // -------------------------------------------------------------------------------------------------- //
 
-import { MtgCard } from './backend/cardData.js';
-import { topEDHRcardnames } from './backend/lists.js'
+// import { MtgCard } from './backend/cardData.js';
+// import { topEDHRcardnames } from './backend/lists.js'
 
-const cardPool = []
-const testCard = new MtgCard("counterspell");
-console.log(testCard)
-topEDHRcardnames.forEach((e) => {
-  //console.log(e)
-  const card = new MtgCard(e);
-  cardPool.push(card)
-  //console.log()
-});
-console.log(cardPool[11]==testCard)
+// const cardPool = []
+// const testCard = new MtgCard("counterspell");
+// console.log(testCard)
+// topEDHRcardnames.forEach((e) => {
+//   //console.log(e)
+//   const card = new MtgCard(e);
+//   cardPool.push(card)
+//   //console.log()
+// });
+// console.log(cardPool[11]==testCard)
 
+// import fs from 'fs'
+
+// fs.writeFileSync(
+//   'data.json',
+//   JSON.stringify(cardPool, null, 2),
+//   'utf-8'
+// )
+import { edhrecTopTwoTousand as cardPool } from "./edhrecTopTwoThousand.js";
 import generatePuzzle from "./backend/generatePuzzle.js";
 
 console.log(generatePuzzle(6, cardPool))

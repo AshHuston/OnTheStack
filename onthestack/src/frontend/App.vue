@@ -3,6 +3,10 @@
 import { usePuzzleStore } from '@/stores/puzzle'
 import Puzzle from './components/puzzle/Puzzle.vue'
 
+
+const puzzleStore = usePuzzleStore()
+
+
 </script>
 
 <template>
