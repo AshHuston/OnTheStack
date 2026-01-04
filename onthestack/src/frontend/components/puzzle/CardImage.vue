@@ -17,8 +17,8 @@ async function setCardImageUrl(cardname) {
     twoSided.value = false
     
     if(data.card_faces){
-        imageUrl.value = data.card_faces[0].image_uris.normal
-        imageUrlBack.value = data.card_faces[1].image_uris.normal
+        imageUrl.value = data.card_faces[0].image_uris.large
+        imageUrlBack.value = data.card_faces[1].image_uris.large
         twoSided.value = true
     }
     else{ imageUrl.value = data.image_uris.normal }
