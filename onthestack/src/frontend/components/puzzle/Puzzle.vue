@@ -10,6 +10,7 @@ import '@awesome.me/webawesome/dist/components/input/input.js';
 import cardGuessField from './CardGuessField.vue'
 
 const guess = ref('')
+const contentScale = ref(1)
 const puzzleStore = usePuzzleStore()
 const cardImageSrc = ref('https://m.media-amazon.com/images/I/61AGZ37D7eL.jpg')
 let showCardSuggestions = true // Temporary flag. Probably will be controlled by a setting or difficulty.
@@ -30,14 +31,6 @@ const puzzleSolved = computed(() => {
     return !solvedStates.value.includes(false)
 })
 
-updatePuzzle()
-
-watch(solvedStates, (newValue, oldValue) => {
-    if ( !newValue.every((value, index) => value === oldValue[index]) ) {
-        updatePuzzle()
-    }
-})
-
 function updatePuzzle() {
     const lastSolvedWord = puzzleStore.puzzle.words[solvedStates.value.lastIndexOf(true)]
     const nextCard = puzzleStore.puzzle.words[solvedStates.value.lastIndexOf(true)+1]
@@ -46,6 +39,14 @@ function updatePuzzle() {
         guess.value = nextCard.blankMap.slice(0, (nextCard.blankMap.indexOf('_') === -1 ? nextCard.blankMap.length : nextCard.blankMap.indexOf('_')))
     }
 }
+
+updatePuzzle()
+
+watch(solvedStates, (newValue, oldValue) => {
+    if ( !newValue.every((value, index) => value === oldValue[index]) ) {
+        updatePuzzle()
+    }
+})
 
 function newPuzzle(length = 5) {
   const puzzle = generatePuzzle(length, cardPool)
@@ -75,34 +76,42 @@ async function findCardImage(cardname) {
 
 
 <template>
-    <div>
-        <CardName
-            v-for="(cardData, index) in puzzleStore.puzzle.words"
-            :index
-            :cardData
-            :isSolved="solvedStates[index]"
-        />
-    </div>
-    
-    <br/><br/>
-    
-    <cardGuessField v-model:guess="guess" :showCardSuggestions />
+    Solved: {{puzzleSolved}}<br/><br/>
+    <div class="wa-stack wa-gap-0 wa-align-items-center">
+        <div class="wa-stack card-name-stack">
+            <CardName
+                v-for="(cardData, index) in puzzleStore.puzzle.words"
+                :index
+                :cardData
+                :isSolved="solvedStates[index]"
+                :class="{ 'card-name-card': index>0}"
+                :style="{'--contentScale': contentScale }"
+            />
+        </div>
+        
+        <br/><br/>
+        
+        <cardGuessField v-model:guess="guess" :showCardSuggestions />
 
-    <div>
-        <button @click="newPuzzle()">Generate Puzzle</button>
-        <br/><br/>
+        <div>
+            <button @click="newPuzzle()">Generate Puzzle</button>
+            <br/><br/>
+        </div>
+        <div>
+            <button @click="giveHnt()">Hint</button>
+            <br/><br/>
+        </div>
     </div>
-    <div>
-        <button @click="giveHnt()">Hint</button>
-        <br/><br/>
-    </div>
-    <div>
-        <button @click="findCardImage(guess)">Card Image</button>
-        <br/><br/>
-    </div>
-    <div>
-        <img style="height:150px" :src="cardImageSrc"/>
-        <br/><br/>
-    </div>
-    Puzzle solved: {{puzzleSolved}}
 </template>
+
+<style>
+html, body {
+    font-size: 18pt;
+}
+.card-name-stack {
+    width: 50%;
+}
+.card-name-card {
+    margin-top: calc(-50px * var(--contentScale));
+}
+</style>

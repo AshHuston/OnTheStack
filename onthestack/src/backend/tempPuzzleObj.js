@@ -8,7 +8,7 @@ export const testPuzzle = new Puzzle({
       isFirstWord: true,
       isLastWord: false,
       topConnector: '',
-      cardname: 'ghalta, primal hunger',
+      cardname: 'thing in the ice',//'ghalta, primal hunger',
       bottomConnector: 'ger',
       blankMap: '______, ______ ______',
       isSolved: true

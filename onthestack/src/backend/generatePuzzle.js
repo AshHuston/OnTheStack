@@ -1,6 +1,10 @@
 import { Puzzle } from './puzzle.js'
 import { shuffledClone } from '../helpers.js';
 
+
+// IMPROVE: Puzzle currently can have repeating cards. I've only seen it happen with MDFCs that could connect to themselves, maybe that is it?
+
+
 /**
  * Generates 
  * @param {number} numOfCards - The number of cards to be included in the puzzle, including the visible first and last ones.
@@ -14,9 +18,9 @@ export default function generatePuzzle(numOfCards, cardPool, startCard, endCard)
     // if ( startCard && !cardPool.includes(startCard) ) {
     //     throw new Error(`${startCard.cardname} not in cardpool`);
     // }
-    if ( endCard && !cardPool.includes(endCard) ) {
-        throw new Error(`${endCard} not in cardpool`);
-    }
+    // if ( endCard && !cardPool.includes(endCard) ) {
+    //     throw new Error(`${endCard} not in cardpool`);
+    // }
 
     let puzzle = new Puzzle({}) // Still need to finish refactoring this logic and that in puzzle.js to get it to work with an object rather than an array
 
@@ -33,7 +37,7 @@ export default function generatePuzzle(numOfCards, cardPool, startCard, endCard)
         bottomConnector: ""
     })
 
-    // find all cards that have any matching start words to that end word
+    // Find all cards that have any matching start words to that end word
     while (puzzle.words.length < numOfCards) {
         const  shuffledCardPool = shuffledClone(cardPool).filter(e => !puzzle.words.some(p => p.cardname == e.cardname))
         let counter = 0
@@ -48,13 +52,9 @@ export default function generatePuzzle(numOfCards, cardPool, startCard, endCard)
                         isFirstWord: false,
                         isLastWord: false,
                         topConnector: lookingAt.startWords[i],
-                        cardname: lookingAt.cardname,
+                        cardname: ensureFrontFaceCardName(lookingAt.cardname),
                         bottomConnector: ""
                     })
-
-                    // IMPROVE: Have this audit happen in the Puzzle object automatiaclly. DONE!
-                    // Audit previous word
-                    // puzzle.at(-2).bottomConnector = puzzle.at(-1).topConnector
 
                     // Set as prevCard
                     prevWord = lookingAt
@@ -76,5 +76,10 @@ export default function generatePuzzle(numOfCards, cardPool, startCard, endCard)
     }
     puzzle.words.at(-1).isLastWord = true
 
+    console.log(puzzle)
     return puzzle
+}
+
+function ensureFrontFaceCardName(card) {
+    return card.split(" // ")[0]
 }

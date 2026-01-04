@@ -35,7 +35,6 @@ async function onClickResult(text) {
             @input="e => onInput(e.target.value)"
             type="text"
             placeholder="Type here..."
-            class="inputBox"
         />
 
         <!-- IMPROVE: This is not working right... I want to make it wait if thers already a call. TBD how to do that.  -->
@@ -55,11 +54,6 @@ async function onClickResult(text) {
 <style>
 .container {
     text-align: center;
-}
-
-.inputBox {
-    display: inline-block;
-    width: 75%;
 }
 
 .list {
