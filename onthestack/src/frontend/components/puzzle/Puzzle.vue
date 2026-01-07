@@ -12,10 +12,10 @@ import cardGuessField from './CardGuessField.vue'
 import fs from 'fs/promises'
 import path from 'path'
 
-let jsonPath = path.resolve('./src/cardPools/edhRecTop10k.json')
+let jsonPath = path.resolve('./src/backend/cardPools/edhrecTop10k.json')
 let fileContents = await fs.readFile(jsonPath, 'utf8')
 const cardPool = JSON.parse(fileContents)
-jsonPath = path.resolve('./src/dailyPuzzle.json')
+jsonPath = path.resolve('./src/backend/dailyPuzzle.json')
 fileContents = await fs.readFile(jsonPath, 'utf8')
 const dailyPuzzle = JSON.parse(fileContents)
 

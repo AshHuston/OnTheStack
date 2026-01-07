@@ -7,7 +7,7 @@ import fs from 'fs/promises'
 import { MtgCard } from './cardData.js';
 import path from 'path'
 
-let jsonPath = path.resolve('./src/backend/cardPools/edhRecTop10k.json')
+let jsonPath = path.resolve('./src/backend/cardPools/edhrecTop10k.json')
 let fileContents = await fs.readFile(jsonPath, 'utf8')
 const edhRecTop10k = JSON.parse(fileContents)
 
