@@ -2,10 +2,10 @@
 import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import { usePuzzleStore } from '../../../stores/puzzle.js'
 import { useSettingsStore } from '../../../stores/settings.js'
-import dailyPuzzle from '../../../../public/dailyPuzzle.json' with {type: 'json'}
+import dailyPuzzle from '../../../../dist/dailyPuzzle.json' with {type: 'json'}
 import CardName from './CardName.vue'
 import { sanitizeString } from '../../../helpers.js'
-import cardPool from '../../../../public/cardPools/edhrecTop10k.json' with {type: 'json'}
+import cardPool from '../../../../dist/cardPools/edhrecTop10k.json' with {type: 'json'}
 import generatePuzzle from "../../../backend/generatePuzzle.js";
 import '@awesome.me/webawesome/dist/components/input/input.js';
 import cardGuessField from './CardGuessField.vue'

@@ -1,8 +1,8 @@
 import { Puzzle } from './puzzle.js'
 import { getFormattedDate, getFormattedTimeStamp, shuffledClone } from '../helpers.js';
 import { usePuzzleStore } from '../stores/puzzle.js';
-import puzzleArchive from '../../public/puzzleArchive.json' with {type: 'json'}
-import edhRecTop10k from '../../public/cardPools/edhRecTop10k.json' with {type: 'json'}
+import puzzleArchive from '../../dist/puzzleArchive.json' with {type: 'json'}
+import edhRecTop10k from '../../dist/cardPools/edhRecTop10k.json' with {type: 'json'}
 import fs from 'fs/promises'
 import { MtgCard } from './cardData.js';
 
