@@ -44,7 +44,7 @@ app.use((req, res, next) => {
     return next()
   }
 
-  res.sendFile(ppath.resolve(__dirname, '../../dist/index.html'))
+  res.sendFile(path.resolve(__dirname, '../../dist/index.html'))
 })
 
 app.listen(PORT, () => {
