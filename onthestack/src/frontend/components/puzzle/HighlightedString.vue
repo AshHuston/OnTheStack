@@ -1,11 +1,14 @@
 <script setup>
 import { computed } from 'vue'
+import { useSettingsStore } from '@/stores/settings';
 
 const props = defineProps({
   text: String,
   start: String,
   end: String,
 })
+
+const settingsStore = useSettingsStore()
 
 const parts = computed(() => {
   const startIndex = props.text.indexOf(props.start)
@@ -27,7 +30,10 @@ const parts = computed(() => {
 <template>
   
     <template v-for="(part, i) in parts" :key="i">
-      <span :class="part.part">
+      <span v-if="settingsStore.highlight" :class="part.part">
+        {{ part.text }}
+      </span>
+      <span v-else>
         {{ part.text }}
       </span>
     </template>

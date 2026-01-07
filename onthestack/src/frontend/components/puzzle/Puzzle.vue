@@ -1,10 +1,11 @@
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import { usePuzzleStore } from '../../../stores/puzzle.js'
-import { testPuzzle } from '../../../backend/tempPuzzleObj.js'
+import { useSettingsStore } from '../../../stores/settings.js'
+import dailyPuzzle from '../../../backend/dailyPuzzle.json' with {type: 'json'}
 import CardName from './CardName.vue'
 import { sanitizeString } from '../../../helpers.js'
-import { edhrecTopTwoTousand as cardPool } from "../../../edhrecTopTwoThousand.js";
+import cardPool from '../../../cardPools/edhrecTop10k.json' with {type: 'json'}
 import generatePuzzle from "../../../backend/generatePuzzle.js";
 import '@awesome.me/webawesome/dist/components/input/input.js';
 import cardGuessField from './CardGuessField.vue'
@@ -12,18 +13,16 @@ import cardGuessField from './CardGuessField.vue'
 const guess = ref('')
 const contentScale = ref(1)
 const puzzleStore = usePuzzleStore()
-const cardImageSrc = ref('https://m.media-amazon.com/images/I/61AGZ37D7eL.jpg')
-let showCardSuggestions = true // Temporary flag. Probably will be controlled by a setting or difficulty.
+const settingsStore = useSettingsStore()
 
-puzzleStore.initialize(testPuzzle)
-
+puzzleStore.initialize(dailyPuzzle)
 
 const solvedStates = computed(() => {
   return puzzleStore.puzzle.words.map((word, i, arr) => {
     const guessIsRight = () => { return sanitizeString(guess.value) === sanitizeString(puzzleStore.puzzle.words[i].cardname) }
     const prevSolved = i === 0 ? true : arr[i - 1].isSolved
     if (prevSolved && guessIsRight() ) { word.isSolved = true }
-    return  word.isSolved
+    return word.isSolved
   })
 })
 
@@ -65,19 +64,52 @@ function giveHnt() {
     updatePuzzle()
 }
 
-async function findCardImage(cardname) {
-   const url = "https://api.scryfall.com/cards/named?fuzzy=" + sanitizeString(cardname)
-   const response = await fetch(url);
-   const data = await response.json();
-   cardImageSrc.value = data.image_uris.normal
+// async function findCardImage(cardname) {
+//    const url = "https://api.scryfall.com/cards/named?fuzzy=" + sanitizeString(cardname)
+//    const response = await fetch(url);
+//    const data = await response.json();
+//    cardImageSrc.value = data.image_uris.normal
+// }
+
+
+// From here down is just the WUBRG easter egg to generate puzzles.
+const sequence = ['w', 'u', 'b', 'r', 'g']
+let index = 0
+
+const onKeyDown = (e) => {
+    if (e.repeat) return
+    const key = e.key.toLowerCase()
+    console.log(index)
+    if (key === sequence[index]) {
+    index++
+    if (index === sequence.length) {
+        settingsStore.showGeneratePuzzleButton = true
+        index = 0
+    }
+    } else {
+    index = 0
+    }
 }
 
+onMounted(() => {
+  window.addEventListener('keydown', onKeyDown)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', onKeyDown)
+})
 </script>
 
 
 <template>
-    Solved: {{puzzleSolved}}<br/><br/>
-    <div class="wa-stack wa-gap-0 wa-align-items-center">
+    <div class="wa-stack wa-gap-m wa-align-items-center">
+        <div class="wa-cluster" style="margin-top: -4rem;">
+            <button v-if="settingsStore.showGeneratePuzzleButton === true" @click="newPuzzle(7)">Generate Puzzle</button>
+            <button @click="giveHnt()">Hint</button>
+        </div>
+
+        <cardGuessField v-model:guess="guess" :showCardSuggestions="settingsStore.autoComplete" />
+
         <div class="wa-stack card-name-stack">
             <CardName
                 v-for="(cardData, index) in puzzleStore.puzzle.words"
@@ -88,26 +120,10 @@ async function findCardImage(cardname) {
                 :style="{'--contentScale': contentScale }"
             />
         </div>
-        
-        <br/><br/>
-        
-        <cardGuessField v-model:guess="guess" :showCardSuggestions />
-
-        <div>
-            <button @click="newPuzzle()">Generate Puzzle</button>
-            <br/><br/>
-        </div>
-        <div>
-            <button @click="giveHnt()">Hint</button>
-            <br/><br/>
-        </div>
     </div>
 </template>
 
 <style>
-html, body {
-    font-size: 18pt;
-}
 .card-name-stack {
     width: 50%;
 }

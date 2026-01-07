@@ -1,12 +1,13 @@
 import { Puzzle } from './puzzle.js'
-import { shuffledClone } from '../helpers.js';
-
-
-// IMPROVE: Puzzle currently can have repeating cards. I've only seen it happen with MDFCs that could connect to themselves, maybe that is it?
-
+import { getFormattedDate, getFormattedTimeStamp, shuffledClone } from '../helpers.js';
+import { usePuzzleStore } from '../stores/puzzle.js';
+import puzzleArchive from './puzzleArchive.json' with {type: 'json'}
+import edhRecTop10k from '../cardPools/edhRecTop10k.json' with {type: 'json'}
+import fs from 'fs/promises'
+import { MtgCard } from './cardData.js';
 
 /**
- * Generates 
+ * Generates a Puzzle
  * @param {number} numOfCards - The number of cards to be included in the puzzle, including the visible first and last ones.
  * @param {Mtgcard[]} cardPool - The pool of card objects to construct the puzzle with.
  * @param {Mtgcard} [startCard] - The starting card.
@@ -76,10 +77,54 @@ export default function generatePuzzle(numOfCards, cardPool, startCard, endCard)
     }
     puzzle.words.at(-1).isLastWord = true
 
-    console.log(puzzle)
+    console.log(`${getFormattedTimeStamp()}: Generated a Puzzle`)
     return puzzle
 }
 
 function ensureFrontFaceCardName(card) {
     return card.split(" // ")[0]
+}
+
+/**
+ * Checks if the most recently archived puzzle is up-to-date. If not, generates a new one with the passed cardPool and numOfCards and archives it.
+ * @param {number} [numOfCards]
+ * @param {MtgCard[]} [cardPool]
+ */
+export function ensureCurrentDatePuzzleInStore(numOfCards = 7, cardPool = edhRecTop10k){
+    const currentDate = getFormattedDate()
+    if (puzzleArchive.puzzles.at(-1).date === currentDate){ return }
+
+    const { length, words } = generatePuzzle(numOfCards, cardPool)
+    const newPuzzle = { length, words, date: currentDate }
+    puzzleArchive.puzzles.push(newPuzzle)
+    puzzleArchive.length = puzzleArchive.puzzles.length
+    archivePuzzle(puzzleArchive)
+    savePuzzle(length, words)
+}
+
+
+
+async function savePuzzle(length, words) {
+  const data = JSON.stringify({ length, words }, null, 4)
+
+  try {
+    await fs.writeFile('src/backend/dailypuzzle.json', data, 'utf8')
+    console.log(getFormattedTimeStamp(), 'Puzzle saved successfully!')
+  } catch (err) {
+    console.error(getFormattedTimeStamp(), 'Failed to save puzzle:', err)
+  }
+}
+
+/**
+ * Save the puzzle archive object to puzzleArchive.json asynchronously
+ * @param {Object} puzzleArchive - The object to save
+ */
+async function archivePuzzle(puzzleArchive) {
+  try {
+    const data = JSON.stringify(puzzleArchive, null, 4)
+    await fs.writeFile('src/backend/puzzleArchive.json', data, 'utf8')
+    console.log(getFormattedTimeStamp(), 'Puzzle archive saved successfully!')
+  } catch (err) {
+    console.error(getFormattedTimeStamp(), 'Failed to save puzzle archive:', err)
+  }
 }

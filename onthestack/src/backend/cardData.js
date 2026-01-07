@@ -3,18 +3,23 @@ import { wordBlacklist } from "./lists.js"
 
 export class MtgCard {
     constructor(cardname = "") {
-        this.cardname = cardname.toLowerCase();
+        this.cardname = cardname.toLowerCase().split("//")[0].trim();
 
         this.startWords = this._initStartWords();
         this.endWords = this._initEndWords();
-        // console.log("START WORDS", this.startWords)
-        // console.log("END WORDS", this.endWords)
+        
+        for (const item of this.startWords) {
+            if (this.endWords.has(item)) {
+                this.startWords.delete(item)
+                this.endWords.delete(item)
+            }
+        }
     }
 
     // IMPROVE: Collapse these two functions into one with a toggle variable
     _findFirstWords(firstWord, minlength = 3) {
         let words = englishWords
-        const legalFirstWords = [firstWord]
+        const legalFirstWords = new Set([firstWord])
         for (let i=0; i<firstWord.length; i++){
             words = words.filter(d => d[i] === firstWord[i])
             for (let n=0; n<words.length; n++) {
@@ -23,7 +28,7 @@ export class MtgCard {
                     && words[n].length >= minlength
                     && !wordBlacklist.includes(words[n])
                 ) {
-                    legalFirstWords.push(words[n])
+                    legalFirstWords.add(words[n])
                 }
             }
         }
@@ -32,7 +37,7 @@ export class MtgCard {
 
     _findLastWords(lastWord, minlength = 3) {
         let words = englishWords
-        const legaLastWords = [lastWord]
+        const legaLastWords = new Set([lastWord])
         for (let i=1; i<=lastWord.length; i++){
             words = words.filter(d => d.slice(-i) === lastWord.slice(-i)); 
             for (let n=0; n<words.length; n++) {
@@ -41,7 +46,7 @@ export class MtgCard {
                     && words[n].length >= minlength
                     && !wordBlacklist.includes(words[n])
                 ) {
-                    legaLastWords.push(words[n])
+                    legaLastWords.add(words[n])
                 }
             }
         }

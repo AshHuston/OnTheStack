@@ -1,19 +1,23 @@
 <script setup>
 
 import { usePuzzleStore } from '@/stores/puzzle'
+import { useSettingsStore } from '@/stores/settings'
 import Puzzle from './components/puzzle/Puzzle.vue'
 
 
 const puzzleStore = usePuzzleStore()
+const settingsStore = useSettingsStore()
 
 
 </script>
 
 <template>
-  <h1>Puzzle</h1>
-  <div>
-    <Puzzle/>
-  </div>
+  <img src="../OnTheStack.png" style="width: 5rem; margin: .5rem;">
+  <Puzzle/>
 </template>
 
-<style scoped></style>
+<style>
+  html, body {
+    font-size: 16pt;
+}
+</style>

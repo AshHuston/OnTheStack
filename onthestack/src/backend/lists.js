@@ -9,7 +9,17 @@ export const wordBlacklist = [
     "eld",
     "ger",
     "kas",
-    // "",
+    "ell",
+    "mes",
+    "ing",
+    //"",
+    //"",
+    //"",
+    //"",
+    //"",
+    //"",
+    //"",
+    //"",
 ]
 
 export const topEDHRcardnames = [
