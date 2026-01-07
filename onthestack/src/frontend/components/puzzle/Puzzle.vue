@@ -2,13 +2,22 @@
 import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import { usePuzzleStore } from '../../../stores/puzzle.js'
 import { useSettingsStore } from '../../../stores/settings.js'
-import dailyPuzzle from '../../../../dist/dailyPuzzle.json' with {type: 'json'}
 import CardName from './CardName.vue'
 import { sanitizeString } from '../../../helpers.js'
-import cardPool from '../../../../dist/cardPools/edhrecTop10k.json' with {type: 'json'}
+// import cardPool from '../../../../dist/cardPools/edhrecTop10k.json' with {type: 'json'}
+// import dailyPuzzle from '../../../../dist/dailyPuzzle.json' with {type: 'json'}
 import generatePuzzle from "../../../backend/generatePuzzle.js";
 import '@awesome.me/webawesome/dist/components/input/input.js';
 import cardGuessField from './CardGuessField.vue'
+import fs from 'fs/promises'
+import path from 'path'
+
+let jsonPath = path.resolve('./src/cardPools/edhRecTop10k.json')
+let fileContents = await fs.readFile(jsonPath, 'utf8')
+const cardPool = JSON.parse(fileContents)
+jsonPath = path.resolve('./src/dailyPuzzle.json')
+fileContents = await fs.readFile(jsonPath, 'utf8')
+const dailyPuzzle = JSON.parse(fileContents)
 
 const guess = ref('')
 const contentScale = ref(1)
