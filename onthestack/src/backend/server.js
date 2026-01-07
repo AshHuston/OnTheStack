@@ -12,7 +12,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 app.use(express.static(path.resolve(__dirname, '../dist')))
 // Serve API routes or static files here
-app.use('*', (req, res) => {
+app.get(/.*/, (req, res) => {
     res.sendFile(path.resolve(__dirname, '../dist/index.html'))
 })
 
