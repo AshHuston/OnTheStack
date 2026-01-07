@@ -7,11 +7,11 @@ import fs from 'fs/promises'
 import { MtgCard } from './cardData.js';
 import path from 'path'
 
-let jsonPath = path.resolve('./src/cardPools/edhRecTop10k.json')
+let jsonPath = path.resolve('./src/backend/cardPools/edhRecTop10k.json')
 let fileContents = await fs.readFile(jsonPath, 'utf8')
 const edhRecTop10k = JSON.parse(fileContents)
 
-jsonPath = path.resolve('./src/puzzleArchive.json')
+jsonPath = path.resolve('./src/backend/puzzleArchive.json')
 fileContents = await fs.readFile(jsonPath, 'utf8')
 const puzzleArchive = JSON.parse(fileContents)
 
