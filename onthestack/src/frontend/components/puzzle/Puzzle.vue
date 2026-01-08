@@ -19,13 +19,13 @@ import path from 'path'
 // fileContents = await fs.readFile(jsonPath, 'utf8')
 // const dailyPuzzle = JSON.parse(fileContents)
 
-const response = await fetch('/backend/cardPools/edhrecTop10k.json')
+const response = await fetch('./data/cardPools/edhrecTop10k.json')
 if (!response.ok) {
   throw new Error('Failed to load edhrecTop10k.json')
 }
 const cardPool = await response.json()
 
-const resp = await fetch('/backend/dailyPuzzle.json')
+const resp = await fetch('./data/dailyPuzzle.json')
 if (!response.ok) {
   throw new Error('Failed to load dailyPuzzle.json')
 }
