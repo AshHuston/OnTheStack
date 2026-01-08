@@ -36,7 +36,7 @@ import { MtgCard } from './cardData.js';
  * @returns {puzzle} The puzzle object
  * @throws {notInCardpool} Thrown when the starting or ending card does not exist in the given cardpool.
  */
-export default function generatePuzzle(numOfCards, cardPool, startCard, endCard) {
+export function generatePuzzle(numOfCards, cardPool, startCard, endCard) {
     // if ( startCard && !cardPool.includes(startCard) ) {
     //     throw new Error(`${startCard.cardname} not in cardpool`);
     // }
