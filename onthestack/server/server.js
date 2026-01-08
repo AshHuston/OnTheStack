@@ -31,7 +31,7 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const distPath = path.resolve(__dirname, '../../dist')
+const distPath = path.resolve(__dirname, '../dist')
 console.log(distPath)
 
 const app = express()
@@ -47,7 +47,7 @@ app.use((req, res, next) => {
     return next()
   }
 
-  res.sendFile(path.resolve(__dirname, '../../dist/index.html'))
+  res.sendFile(path.resolve(__dirname, './dist/index.html'))
 })
 
 //************ my api now
