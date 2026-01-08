@@ -9,7 +9,7 @@ import { sanitizeString } from '../../../helpers.js'
 //import generatePuzzle from "../../../../server/backend/generatePuzzle.js";
 import '@awesome.me/webawesome/dist/components/input/input.js';
 import cardGuessField from './CardGuessField.vue'
-import fs from 'fs/promises'
+//import fs from 'fs/promises'
 // let jsonPath = path.resolve('./src/backend/cardPools/edhrecTop10k.json')
 // let fileContents = await fs.readFile(jsonPath, 'utf8')
 // const cardPool = JSON.parse(fileContents)

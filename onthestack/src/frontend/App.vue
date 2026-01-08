@@ -5,8 +5,8 @@ import { useSettingsStore } from '@/stores/settings'
 import Puzzle from './components/puzzle/Puzzle.vue'
 
 
-const puzzleStore = usePuzzleStore()
-const settingsStore = useSettingsStore()
+// const puzzleStore = usePuzzleStore()
+// const settingsStore = useSettingsStore()
 
 
 </script>
