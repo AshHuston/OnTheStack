@@ -1,0 +1,68 @@
+{
+    "length": null,
+    "words": [
+        {
+            "isFirstWord": true,
+            "isLastWord": false,
+            "topConnector": "",
+            "cardname": "moonsnare prototype",
+            "bottomConnector": "prototype",
+            "blankMap": "_________ _________",
+            "isSolved": true
+        },
+        {
+            "isFirstWord": false,
+            "isLastWord": false,
+            "topConnector": "prototype",
+            "cardname": "prototype portal",
+            "bottomConnector": "portal",
+            "blankMap": "_________ ______",
+            "isSolved": false
+        },
+        {
+            "isFirstWord": false,
+            "isLastWord": false,
+            "topConnector": "portal",
+            "cardname": "portal mage",
+            "bottomConnector": "age",
+            "blankMap": "______ ____",
+            "isSolved": false
+        },
+        {
+            "isFirstWord": false,
+            "isLastWord": false,
+            "topConnector": "age",
+            "cardname": "agent of erebos",
+            "bottomConnector": "bos",
+            "blankMap": "_____ __ ______",
+            "isSolved": false
+        },
+        {
+            "isFirstWord": false,
+            "isLastWord": false,
+            "topConnector": "bos",
+            "cardname": "bosh, iron golem",
+            "bottomConnector": "golem",
+            "blankMap": "____, ____ _____",
+            "isSolved": false
+        },
+        {
+            "isFirstWord": false,
+            "isLastWord": false,
+            "topConnector": "golem",
+            "cardname": "golem foundry",
+            "bottomConnector": "dry",
+            "blankMap": "_____ _______",
+            "isSolved": false
+        },
+        {
+            "isFirstWord": false,
+            "isLastWord": true,
+            "topConnector": "dry",
+            "cardname": "dryad of the ilysian grove",
+            "bottomConnector": "",
+            "blankMap": "_____ __ ___ _______ _____",
+            "isSolved": false
+        }
+    ]
+}
