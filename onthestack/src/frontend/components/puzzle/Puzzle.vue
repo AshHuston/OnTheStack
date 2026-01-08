@@ -1,6 +1,7 @@
 <script setup>
 import CardName from './CardName.vue'
 import cardGuessField from './CardGuessField.vue'
+import { ref } from 'vue'
 
 const guess = ref('')
 </script>
