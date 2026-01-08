@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import { usePuzzleStore } from '../../../stores/puzzle.js'
@@ -46,9 +47,9 @@ const solvedStates = computed(() => {
   })
 })
 
-const puzzleSolved = computed(() => {
-    return !solvedStates.value.includes(false)
-})
+// const puzzleSolved = computed(() => {
+//     return !solvedStates.value.includes(false)
+// })
 
 function updatePuzzle() {
     const lastSolvedWord = puzzleStore.puzzle.words[solvedStates.value.lastIndexOf(true)]
@@ -134,7 +135,8 @@ onUnmounted(() => {
 
         <div class="wa-stack card-name-stack">
             <CardName
-                v-for="(cardData, index) in puzzleStore.puzzle.words"
+                v-for="(cardData, index, key) in puzzleStore.puzzle.words"
+                v-bind:key
                 :index
                 :cardData
                 :isSolved="solvedStates[index]"
