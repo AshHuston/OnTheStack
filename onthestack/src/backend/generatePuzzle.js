@@ -11,7 +11,7 @@ import path from 'path'
 // let fileContents = await fs.readFile(jsonPath, 'utf8')
 // const edhRecTop10k = JSON.parse(fileContents)
 
-let response = await fetch('/backend/cardPools/edhrecTop10k.json')
+const response = await fetch('/backend/cardPools/edhrecTop10k.json')
 if (!response.ok) {
   throw new Error('Failed to load edhrecTop10k.json')
 }
@@ -20,11 +20,11 @@ const edhRecTop10k = await response.json()
 // jsonPath = path.resolve('./src/backend/puzzleArchive.json')
 // fileContents = await fs.readFile(jsonPath, 'utf8')
 // const puzzleArchive = JSON.parse(fileContents)
-response = await fetch('/backend/puzzleArchive.json')
+const resp = await fetch('/backend/puzzleArchive.json')
 if (!response.ok) {
   throw new Error('Failed to load puzzleArchive.json')
 }
-const puzzleArchive = await response.json()
+const puzzleArchive = await resp.json()
 
 
 /**
