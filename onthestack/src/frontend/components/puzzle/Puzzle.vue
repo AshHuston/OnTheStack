@@ -12,12 +12,26 @@ import cardGuessField from './CardGuessField.vue'
 import fs from 'fs/promises'
 import path from 'path'
 
-let jsonPath = path.resolve('./src/backend/cardPools/edhrecTop10k.json')
-let fileContents = await fs.readFile(jsonPath, 'utf8')
+// let jsonPath = path.resolve('./src/backend/cardPools/edhrecTop10k.json')
+// let fileContents = await fs.readFile(jsonPath, 'utf8')
+// const cardPool = JSON.parse(fileContents)
+// jsonPath = path.resolve('./src/backend/dailyPuzzle.json')
+// fileContents = await fs.readFile(jsonPath, 'utf8')
+// const dailyPuzzle = JSON.parse(fileContents)
+
+let response = await fetch('/backend/cardPools/edhrecTop10k.json')
+if (!response.ok) {
+  throw new Error('Failed to load edhrecTop10k.json')
+}
 const cardPool = JSON.parse(fileContents)
-jsonPath = path.resolve('./src/backend/dailyPuzzle.json')
-fileContents = await fs.readFile(jsonPath, 'utf8')
-const dailyPuzzle = JSON.parse(fileContents)
+ = await response.json()
+
+response = await fetch('/backend/dailyPuzzle.json')
+if (!response.ok) {
+  throw new Error('Failed to load dailyPuzzle.json')
+}
+const dailyPuzzle = await response.json()
+
 
 const guess = ref('')
 const contentScale = ref(1)

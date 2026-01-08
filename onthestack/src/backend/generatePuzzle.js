@@ -7,13 +7,25 @@ import fs from 'fs/promises'
 import { MtgCard } from './cardData.js';
 import path from 'path'
 
-let jsonPath = path.resolve('./src/backend/cardPools/edhrecTop10k.json')
-let fileContents = await fs.readFile(jsonPath, 'utf8')
-const edhRecTop10k = JSON.parse(fileContents)
+// let jsonPath = path.resolve('./src/backend/cardPools/edhrecTop10k.json')
+// let fileContents = await fs.readFile(jsonPath, 'utf8')
+// const edhRecTop10k = JSON.parse(fileContents)
 
-jsonPath = path.resolve('./src/backend/puzzleArchive.json')
-fileContents = await fs.readFile(jsonPath, 'utf8')
-const puzzleArchive = JSON.parse(fileContents)
+let response = await fetch('/backend/cardPools/edhrecTop10k.json')
+if (!response.ok) {
+  throw new Error('Failed to load edhrecTop10k.json')
+}
+const edhRecTop10k = await response.json()
+
+// jsonPath = path.resolve('./src/backend/puzzleArchive.json')
+// fileContents = await fs.readFile(jsonPath, 'utf8')
+// const puzzleArchive = JSON.parse(fileContents)
+response = await fetch('/backend/puzzleArchive.json')
+if (!response.ok) {
+  throw new Error('Failed to load puzzleArchive.json')
+}
+const puzzleArchive = await response.json()
+
 
 /**
  * Generates a Puzzle
