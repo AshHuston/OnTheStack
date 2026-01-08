@@ -123,6 +123,7 @@ onUnmounted(() => {
 
 
 <template>
+    <div>TEST PUZZLE COMPIENNT</div>
     <div class="wa-stack wa-gap-m wa-align-items-center">
         <div class="wa-cluster" style="margin-top: -4rem;">
             <button v-if="settingsStore.showGeneratePuzzleButton === true" @click="newPuzzle(7)">Generate Puzzle</button>
