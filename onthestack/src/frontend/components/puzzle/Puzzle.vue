@@ -6,12 +6,10 @@ import CardName from './CardName.vue'
 import { sanitizeString } from '../../../helpers.js'
 // import cardPool from '../../../../dist/cardPools/edhrecTop10k.json' with {type: 'json'}
 // import dailyPuzzle from '../../../../dist/dailyPuzzle.json' with {type: 'json'}
-import generatePuzzle from "../../../backend/generatePuzzle.js";
+//import generatePuzzle from "../../../../server/backend/generatePuzzle.js";
 import '@awesome.me/webawesome/dist/components/input/input.js';
 import cardGuessField from './CardGuessField.vue'
 import fs from 'fs/promises'
-import path from 'path'
-
 // let jsonPath = path.resolve('./src/backend/cardPools/edhrecTop10k.json')
 // let fileContents = await fs.readFile(jsonPath, 'utf8')
 // const cardPool = JSON.parse(fileContents)
@@ -19,13 +17,13 @@ import path from 'path'
 // fileContents = await fs.readFile(jsonPath, 'utf8')
 // const dailyPuzzle = JSON.parse(fileContents)
 
-const response = await fetch('./data/cardPools/edhrecTop10k.json')
-if (!response.ok) {
-  throw new Error('Failed to load edhrecTop10k.json')
-}
-const cardPool = await response.json()
+// const response = await fetch(pathToFileURL('/data/cardPools/edhrecTop10k.json'))
+// if (!response.ok) {
+//   throw new Error('Failed to load edhrecTop10k.json')
+// }
+// const cardPool = await response.json()
 
-const resp = await fetch('./data/dailyPuzzle.json')
+const resp = await fetch('/api/get-daily-puzzle')
 if (!response.ok) {
   throw new Error('Failed to load dailyPuzzle.json')
 }
@@ -69,12 +67,13 @@ watch(solvedStates, (newValue, oldValue) => {
     }
 })
 
-function newPuzzle(length = 5) {
-  const puzzle = generatePuzzle(length, cardPool)
-  console.log("PUZZLE", puzzle)
-  puzzleStore.initialize(puzzle)
-  puzzleStore.updateBlankMap(0)
-  updatePuzzle()
+async function newPuzzle() {
+    const res = await fetch('/api/generate-puzzle');
+    const puzzle = await res.json();
+    console.log("PUZZLE", puzzle)
+    puzzleStore.initialize(puzzle)
+    puzzleStore.updateBlankMap(0)
+    updatePuzzle()
 }
 
 function giveHnt() {

@@ -5,3 +5,13 @@ Options we have for setting difficulty/experience:
 - show/remove the connector words
 - show the end card
 - number of cards in puzzle
+
+
+
+
+
+
+Functions i need to make api requests:
+- generatePuzzle
+- all helpers? (if used in backend)
+- 
