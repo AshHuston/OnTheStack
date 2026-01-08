@@ -119,6 +119,9 @@ watch(
 //         }
 //     }
 // )
+function onImageError(){
+    console.log('Failed image load')
+}
 </script>
 
 <template>
@@ -133,6 +136,7 @@ watch(
             @mouseenter="isHovering = true"
             @mouseleave="isHovering = false"
             @mousemove="onMouseMove"
+            @error="onImageError"
         />
     </div>
     <div v-else>
@@ -140,6 +144,7 @@ watch(
             :src="cardBackUrl" 
             alt="Result image"
             class="card-image"
+            @error="onImageError"
         />
     </div>
     <div
@@ -154,12 +159,14 @@ watch(
             :src="imageUrl" 
             alt="Result image"
             class="hover-blowup"
+            @error="onImageError"
         />
         <img  
             v-if="twoSided"
             :src="imageUrlBack" 
             alt="Result image"
             class="hover-blowup"
+            @error="onImageError"
         />
     </div>
 </template>
