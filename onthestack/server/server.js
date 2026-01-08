@@ -35,7 +35,7 @@ const distPath = path.resolve(__dirname, '../dist')
 console.log(distPath)
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = 3000
 
 // 1️⃣ Serve static assets FIRST
 app.use(express.static(distPath))

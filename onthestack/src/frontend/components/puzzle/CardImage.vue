@@ -1,7 +1,7 @@
 <script setup>
 import '@awesome.me/webawesome/dist/components/card/card.js';
 import { sanitizeString } from '@/helpers';
-import { ref, onMounted, watch, nextTick } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 
 const props = defineProps({
   cardName: Object,
@@ -56,11 +56,11 @@ const onMouseMove = async (e) => {
     mouseY.value = e.clientY
 
     //await nextTick()
-    const rect = hoveredImg.value.getBoundingClientRect()
+    // const rect = hoveredImg.value.getBoundingClientRect()
 
     // IMPROVE: Extract this logic so we arent running it every frame.
     let idealImageWidth = null
-    let idealImageHight = null
+    // let idealImageHight = null
     await getImageSize(hoveredImg.value.firstElementChild.src).then(size => {
         idealImageWidth = hoveredImg.value.firstElementChild.height * (size.width / size.height)
     })  
@@ -95,7 +95,7 @@ onMounted(async () => {
 
 watch(
     () => props.cardName,
-    (newVal, oldVal) => {
+    (newVal) => {
         setCardImageUrl(newVal)
     }
 );

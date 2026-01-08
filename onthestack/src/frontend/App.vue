@@ -1,7 +1,7 @@
 <script setup>
 
-import { usePuzzleStore } from '@/stores/puzzle'
-import { useSettingsStore } from '@/stores/settings'
+// import { usePuzzleStore } from '@/stores/puzzle'
+// import { useSettingsStore } from '@/stores/settings'
 import Puzzle from './components/puzzle/Puzzle.vue'
 
 

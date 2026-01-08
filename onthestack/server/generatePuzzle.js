@@ -4,7 +4,7 @@ import { getFormattedDate, getFormattedTimeStamp, shuffledClone } from './helper
 import puzzleArchive from './puzzleArchive.json' with {type: 'json'}
 import edhRecTop10k from './cardPools/edhrecTop10k.json' with {type: 'json'}
 import fs from 'fs/promises'
-import { MtgCard } from './cardData.js';
+//import { MtgCard } from './cardData.js';
 //import { pathToFileURL } from 'url';
 
 // let jsonPath = path.resolve('./src/backend/cardPools/edhrecTop10k.json')
