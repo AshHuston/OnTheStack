@@ -113,7 +113,10 @@ function ensureFrontFaceCardName(card) {
  */
 export function ensureCurrentDatePuzzleInStore(numOfCards = 7, cardPool = edhRecTop10k){
     const currentDate = getFormattedDate()
-    if (puzzleArchive.puzzles.at(-1).date === currentDate){ return }
+    if (puzzleArchive.puzzles.at(-1).date === currentDate){ 
+      console.log('Archive is up-to-date already. No puzle generated.'); 
+      return;
+    }
 
     const { length, words } = generatePuzzle(numOfCards, cardPool)
     const newPuzzle = { length, words, date: currentDate }
