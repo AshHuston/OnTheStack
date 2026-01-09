@@ -14,7 +14,6 @@ export class Puzzle {
   }
 
   addCard({isFirstWord, isLastWord, topConnector, cardname, bottomConnector, isSolved = (isFirstWord)}) {
-    //console.log(isFirstWord, isLastWord, topConnector, cardname, bottomConnector)
     const blankMap = this._buildMap(cardname)
     if (!isFirstWord) { this.words.at(-1).bottomConnector = topConnector }
     this.words.push({isFirstWord, isLastWord, topConnector, cardname, bottomConnector, blankMap, isSolved})

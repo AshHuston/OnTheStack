@@ -53,15 +53,12 @@ export class MtgCard {
         return legaLastWords
     }
 
+    // IMPROVE: Collapse these two functions into one with a toggle variable
     _initStartWords() {
         const firstWord = 
             this.cardname
             .trim()
             .split(/\s+/)[0]
-            // .split("'")[0]
-            // .split("'s")[0]
-            // .split(",")[0]
-            ;
 
         return this._findFirstWords(firstWord)
     }
@@ -71,10 +68,7 @@ export class MtgCard {
             this.cardname
             .trim()
             .split(/\s+/).at(-1)
-            // .split("'")[0]
-            // .split("'s")[0]
-            // .split(",")[0]
-            ;
+
         return this._findLastWords(lastWord)
     }
 }

@@ -1,29 +1,6 @@
 import { startChronJobs } from "./chronjobs.js";
 import { generatePuzzle, ensureCurrentDatePuzzleInStore } from "./generatePuzzle.js";
 import cardPool from './cardPools/edhrecTop10k.json' with {type:'json'}
-// import dailyPuzzle from './dailyPuzzle.json' with {type:'json'}
-// import express from 'express'
-// import path from 'path'
-// import { fileURLToPath } from "url";
-
-
-// // ************ RENDER STUFF
-// const __filename = fileURLToPath(import.meta.url)
-// const __dirname = path.dirname(__filename)
-// const app = express()
-// const PORT = process.env.PORT || 3000
-// app.use(express.static(path.resolve(__dirname, '../dist')))
-// // Serve API routes or static files here
-// app.get(/.*/, (req, res) => {
-//     res.sendFile(path.resolve(__dirname, '../../dist/index.html'))
-// })
-
-// // Render provides the port via env variable
-
-// app.listen(PORT, () => {
-//   console.log(`Server listening on port ${PORT}`)
-// })
-
 import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -63,9 +40,7 @@ app.get('/api/get-daily-puzzle', async (req, res) => {
 
 app.use(express.static(distPath))
 
-// 2️⃣ SPA fallback ONLY for non-asset routes
 app.use((req, res, next) => {
-  // If request is for a file, let it 404 normally
   if (req.path.includes('.')) {
     return next()
   }

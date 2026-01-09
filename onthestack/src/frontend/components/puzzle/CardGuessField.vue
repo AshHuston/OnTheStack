@@ -97,14 +97,14 @@ const onChangeShowFirstLetter = (event) => {
 
 .list {
     display: inline-block;
-    list-style: none;       /* removes the bullets */
-    padding: 0;             /* remove default padding */
-    margin: 0,;              /* remove default margin */
-    border: 3px solid #ddd; /* optional: add border */
-    border-radius: 10px;     /* optional: rounded corners */
-    position: absolute;   /* removes from layout */
+    list-style: none;
+    padding: 0;
+    margin: 0,;
+    border: 3px solid #ddd;
+    border-radius: 10px;
+    position: absolute;
     top: 100%;
-    z-index: 9999;        /* above everything */ 
+    z-index: 9999;
     background: white;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }

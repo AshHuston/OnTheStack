@@ -55,12 +55,8 @@ const onMouseMove = async (e) => {
     mouseX.value = e.clientX
     mouseY.value = e.clientY
 
-    //await nextTick()
-    // const rect = hoveredImg.value.getBoundingClientRect()
-
     // IMPROVE: Extract this logic so we arent running it every frame.
     let idealImageWidth = null
-    // let idealImageHight = null
     await getImageSize(hoveredImg.value.firstElementChild.src).then(size => {
         idealImageWidth = hoveredImg.value.firstElementChild.height * (size.width / size.height)
     })  
@@ -89,8 +85,6 @@ onMounted(async () => {
   } finally {
     loading.value = false;
   }
-
-//   observer.observe(hoveredImg.value)
 });
 
 watch(
@@ -100,25 +94,6 @@ watch(
     }
 );
 
-// watch(
-//     () => idealRect.value,
-//     (newVal, oldVal) => {
-        
-//         if(newVal.height == 0 || oldVal.height == 0){
-//             moveImageX.value = false
-//             moveImageY.value = false
-//             return
-//         }
-//         console.log("NEW", newVal.height, "OLD", oldVal.height)
-//         if(newVal.height < idealRect.value.height){
-//             moveImageY.value = true
-//         }
-
-//         if(newVal.width < idealRect.value.width){
-//             moveImageX.value = true
-//         }
-//     }
-// )
 function onImageError(){
     console.log('Failed image load')
 }

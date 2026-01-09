@@ -129,10 +129,12 @@ onUnmounted(() => {
     <div class="wa-stack wa-gap-m wa-align-items-center">
         <div class="wa-cluster" style="margin-top: -4rem;">
             <button v-if="settingsStore.showGeneratePuzzleButton === true" @click="newPuzzle(7)">Generate Puzzle</button>
-            <button @click="giveHnt()">Hint</button>
+            
         </div>
 
+        <div class="wa-cluster wa-align-items-end" >
         <cardGuessField v-model:guess="guess" :showCardSuggestions="settingsStore.autoComplete" />
+        <button @click="giveHnt()">Hint</button></div>
 
         <div class="wa-stack card-name-stack">
             <CardName
@@ -159,7 +161,7 @@ onUnmounted(() => {
 
 <style>
 .card-name-stack {
-    width: 50%;
+    width: 60%;
 }
 .card-name-card {
     margin-top: calc(-50px * var(--contentScale));

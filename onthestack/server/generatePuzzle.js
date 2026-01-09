@@ -1,30 +1,8 @@
 import { Puzzle } from './puzzle.js'
 import { getFormattedDate, getFormattedTimeStamp, shuffledClone } from './helpers.js';
-//import { usePuzzleStore } from '../../src/stores/puzzle.js';
 import puzzleArchive from './puzzleArchive.json' with {type: 'json'}
 import edhRecTop10k from './cardPools/edhrecTop10k.json' with {type: 'json'}
 import fs from 'fs/promises'
-//import { MtgCard } from './cardData.js';
-//import { pathToFileURL } from 'url';
-
-// let jsonPath = path.resolve('./src/backend/cardPools/edhrecTop10k.json')
-// let fileContents = await fs.readFile(jsonPath, 'utf8')
-// const edhRecTop10k = JSON.parse(fileContents)
-
-// const response = await fetch(pathToFileURL('/data/cardPools/edhrecTop10k.json'))
-// if (!response.ok) {
-//   throw new Error('Failed to load edhrecTop10k.json')
-// }
-// const edhRecTop10k = await response.json()
-
-// jsonPath = path.resolve('./src/backend/puzzleArchive.json')
-// fileContents = await fs.readFile(jsonPath, 'utf8')
-// const puzzleArchive = JSON.parse(fileContents)
-// const resp = await fetch(pathToFileURL('/data/puzzleArchive.json'))
-// if (!response.ok) {
-//   throw new Error('Failed to load puzzleArchive.json')
-// }
-// const puzzleArchive = await resp.json()
 
 
 /**
@@ -37,6 +15,7 @@ import fs from 'fs/promises'
  * @throws {notInCardpool} Thrown when the starting or ending card does not exist in the given cardpool.
  */
 export function generatePuzzle(numOfCards, cardPool, startCard, endCard) {
+  //IMPROVE vv
     // if ( startCard && !cardPool.includes(startCard) ) {
     //     throw new Error(`${startCard.cardname} not in cardpool`);
     // }
@@ -44,7 +23,7 @@ export function generatePuzzle(numOfCards, cardPool, startCard, endCard) {
     //     throw new Error(`${endCard} not in cardpool`);
     // }
 
-    let puzzle = new Puzzle({}) // Still need to finish refactoring this logic and that in puzzle.js to get it to work with an object rather than an array
+    let puzzle = new Puzzle({})
 
     const firstWord = startCard ?? cardPool.length
         ? cardPool[Math.floor(Math.random() * cardPool.length)]
@@ -59,7 +38,6 @@ export function generatePuzzle(numOfCards, cardPool, startCard, endCard) {
         bottomConnector: ""
     })
 
-    // Find all cards that have any matching start words to that end word
     while (puzzle.words.length < numOfCards) {
         const  shuffledCardPool = shuffledClone(cardPool).filter(e => !puzzle.words.some(p => p.cardname == e.cardname))
         let counter = 0
