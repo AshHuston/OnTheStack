@@ -1,5 +1,6 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <script setup>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { useSettingsStore } from '@/stores/settings';
 import '@awesome.me/webawesome/dist/components/input/input.js';
 import '@awesome.me/webawesome/dist/components/checkbox/checkbox.js';
@@ -38,6 +39,9 @@ const onChangeAutocomplete = (event) => {
 const onChangeHighlight = (event) => {
   settingsStore.highlight = event.target.checked
 }
+const onChangeShowFirstLetter = (event) => {
+  settingsStore.showFirstLetter = event.target.checked
+}
 
 </script>
 
@@ -55,6 +59,12 @@ const onChangeHighlight = (event) => {
                 :checked="settingsStore.highlight" 
                 @change="onChangeHighlight"
             >Highlight</wa-checkbox>
+            <wa-checkbox 
+                size="small"
+                :defaultChecked="settingsStore.showFirstLetter" 
+                :checked="settingsStore.showFirstLetter" 
+                @change="onChangeShowFirstLetter"
+            >First Letter</wa-checkbox>
         </div>
         <wa-input
             :value="props.guess"

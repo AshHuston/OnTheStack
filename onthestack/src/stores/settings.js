@@ -5,10 +5,12 @@ export const useSettingsStore = defineStore('settings', () => {
     const autoComplete = ref(false)
     const highlight = ref(true)
     const showGeneratePuzzleButton = ref(false)
+    const showFirstLetter = ref(false)
 
     return {
-    autoComplete,
-    highlight,
-    showGeneratePuzzleButton
+        autoComplete,
+        highlight,
+        showGeneratePuzzleButton,
+        showFirstLetter
     }
 })

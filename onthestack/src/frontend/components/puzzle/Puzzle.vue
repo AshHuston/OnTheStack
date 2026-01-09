@@ -59,6 +59,18 @@ watch(solvedStates, (newValue, oldValue) => {
     }
 })
 
+watch(settingsStore, (newValue, oldValue) => {
+    puzzleStore.puzzle.words.forEach(element => {
+        if (settingsStore.showFirstLetter === true){
+            element.blankMap = element.cardname[0] + element.blankMap.slice(1)
+        }
+        else if (!element.isSolved){
+            element.blankMap = '_' + element.blankMap.slice(1)
+        }
+    });
+  updatePuzzle()
+})
+
 async function newPuzzle() {
     const res = await fetch('/api/generate-puzzle');
     const puzzle = await res.json();
@@ -133,6 +145,7 @@ onUnmounted(() => {
             />
         </div>
     </div>
+    <div class="page-padding"></div>
 </template>
 
 <style>
@@ -141,5 +154,8 @@ onUnmounted(() => {
 }
 .card-name-card {
     margin-top: calc(-50px * var(--contentScale));
+}
+.page-padding{
+    padding-bottom: 25rem;
 }
 </style>

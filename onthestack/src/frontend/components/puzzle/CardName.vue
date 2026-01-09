@@ -1,15 +1,15 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <script setup>
-import { usePuzzleStore } from '@/stores/puzzle'
 import HighlightedCardname from './HighlightedString.vue'
 import '@awesome.me/webawesome/dist/components/card/card.js';
 import CardImage from './CardImage.vue';
 
-const puzzleStore = usePuzzleStore()
 const props = defineProps({
   index: Number,
   cardData: Object,
   isSolved: Boolean
 })
+
 </script>
 
 <template>
