@@ -37,7 +37,26 @@ console.log(distPath)
 const app = express()
 const PORT = 3000
 
-// 1️⃣ Serve static assets FIRST
+app.use((req, res, next) => {
+  console.log('INCOMING:', req.method, req.url)
+  next()
+})
+
+
+app.get('/api/generate-puzzle', async (req, res) => {
+  // IMPROVE should add q params
+  const length = 6
+  const puzzle = await generatePuzzle(length, cardPool);
+  res.json(puzzle);
+});
+
+app.get('/api/get-daily-puzzle', (req, res) => {
+  if (!dailyPuzzle) {
+    return res.status(404).json({ error: 'Puzzle not found' });
+  }
+  res.json(dailyPuzzle);
+});
+
 app.use(express.static(distPath))
 
 // 2️⃣ SPA fallback ONLY for non-asset routes
@@ -49,20 +68,6 @@ app.use((req, res, next) => {
 
   res.sendFile(path.resolve(__dirname, '../dist/index.html'))
 })
-
-//************ my api now
-app.get('/api/generate-puzzle', async (req, res) => {
-  // IMPROVE should add q params
-  const length = 6
-  const puzzle = await generatePuzzle(length, cardPool);
-  res.json(puzzle);
-});
-
-app.get('/api/get-daily-puzzle', async (req, res) => {
-  res.json(dailyPuzzle);
-});
-
-
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)

@@ -3,8 +3,6 @@
 // import { usePuzzleStore } from '@/stores/puzzle'
 // import { useSettingsStore } from '@/stores/settings'
 import Puzzle from './components/puzzle/Puzzle.vue'
-console.log('Puzzle component:', Puzzle);
-
 
 // const puzzleStore = usePuzzleStore()
 // const settingsStore = useSettingsStore()
