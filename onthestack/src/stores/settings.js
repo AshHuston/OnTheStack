@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 export const useSettingsStore = defineStore('settings', () => {
     const autoComplete = ref(false)
-    const highlight = ref(true)
+    const highlight = ref(false)
     const showGeneratePuzzleButton = ref(false)
     const showFirstLetter = ref(false)
 

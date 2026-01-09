@@ -5,12 +5,12 @@ import { usePuzzleStore } from '../../../stores/puzzle.js'
 import { useSettingsStore } from '../../../stores/settings.js'
 import CardName from './CardName.vue'
 import { sanitizeString } from '../../../helpers.js'
-
+import '@awesome.me/webawesome/dist/components/dialog/dialog.js';
 import '@awesome.me/webawesome/dist/components/input/input.js';
 import cardGuessField from './CardGuessField.vue'
 
 const dailyPuzzle = ref(null)
-
+const doneLoading = ref(false)
 
 const guess = ref('')
 const contentScale = ref(1)
@@ -39,9 +39,9 @@ const solvedStates = computed(() => {
     })
 })
 
-// const puzzleSolved = computed(() => {
-//     return !solvedStates.value.includes(false)
-// })
+const puzzleSolved = computed(() => {
+    return !solvedStates.value.includes(false)
+})
 
 function updatePuzzle() {
     if(puzzleStore.puzzle === null || puzzleStore.puzzle.value === null){ return }
@@ -59,7 +59,7 @@ watch(solvedStates, (newValue, oldValue) => {
     }
 })
 
-watch(settingsStore, (newValue, oldValue) => {
+watch(settingsStore, () => {
     puzzleStore.puzzle.words.forEach(element => {
         if (settingsStore.showFirstLetter === true){
             element.blankMap = element.cardname[0] + element.blankMap.slice(1)
@@ -116,6 +116,7 @@ onMounted(async () => {
     dailyPuzzle.value = await response.json()
     puzzleStore.initialize(dailyPuzzle.value)
     updatePuzzle()
+    doneLoading.value = true
 })
 
 onUnmounted(() => {
@@ -145,6 +146,14 @@ onUnmounted(() => {
             />
         </div>
     </div>
+
+    <wa-dialog :open="puzzleSolved && doneLoading" label="Congratulations">
+        You won!!! Come back tomorrow for a new puzzle!
+        <template v-slot:footer>
+            <wa-button  variant="brand" data-dialog="close">Close</wa-button>
+        </template>
+    </wa-dialog>
+
     <div class="page-padding"></div>
 </template>
 
