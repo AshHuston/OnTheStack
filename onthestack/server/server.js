@@ -1,7 +1,7 @@
 import { startChronJobs } from "./chronjobs.js";
 import { generatePuzzle, ensureCurrentDatePuzzleInStore } from "./generatePuzzle.js";
 import cardPool from './cardPools/edhrecTop10k.json' with {type:'json'}
-import dailyPuzzle from './dailyPuzzle.json' with {type:'json'}
+// import dailyPuzzle from './dailyPuzzle.json' with {type:'json'}
 // import express from 'express'
 // import path from 'path'
 // import { fileURLToPath } from "url";
@@ -50,10 +50,12 @@ app.get('/api/generate-puzzle', async (req, res) => {
   res.json(puzzle);
 });
 
-app.get('/api/get-daily-puzzle', (req, res) => {
-  if (!dailyPuzzle) {
+app.get('/api/get-daily-puzzle', async (req, res) => {
+  const response = await fetch('/dailyPuzzle.json');
+  if (!response.ok) {
     return res.status(404).json({ error: 'Puzzle not found' });
   }
+  const dailyPuzzle = await response.json();
   res.json(dailyPuzzle);
 });
 
