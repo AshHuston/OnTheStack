@@ -5,7 +5,7 @@ import { getFormattedTimeStamp } from './helpers.js'
 export function startChronJobs(){
     // Every day at 12:01am New York time
     cron.schedule(
-        "45 9 * * *",//'1 0 * * *', 
+        '1 0 * * *', 
         () => {
             console.log(`${getFormattedTimeStamp()}: attempting puzzle verification. should be  8;20`)
             ensureCurrentDatePuzzleInStore()
