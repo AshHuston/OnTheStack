@@ -27,6 +27,7 @@ import cardPool from './cardPools/edhrecTop10k.json' with {type:'json'}
 import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import fs from 'node:fs/promises';
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -51,11 +52,12 @@ app.get('/api/generate-puzzle', async (req, res) => {
 });
 
 app.get('/api/get-daily-puzzle', async (req, res) => {
-  const response = await fetch('/dailyPuzzle.json');
-  if (!response.ok) {
-    return res.status(404).json({ error: 'Puzzle not found' });
-  }
-  const dailyPuzzle = await response.json();
+  const dailyPuzzle = JSON.parse(
+  await fs.readFile(
+    new URL('./dailyPuzzle.json', import.meta.url),
+    'utf8'
+  )
+);
   res.json(dailyPuzzle);
 });
 

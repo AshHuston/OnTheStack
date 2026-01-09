@@ -1,1 +1,68 @@
-{}
+{
+    "length": null,
+    "words": [
+        {
+            "isFirstWord": true,
+            "isLastWord": false,
+            "topConnector": "",
+            "cardname": "illusionist's stratagem",
+            "bottomConnector": "gem",
+            "blankMap": "___________'_ _________",
+            "isSolved": true
+        },
+        {
+            "isFirstWord": false,
+            "isLastWord": false,
+            "topConnector": "gem",
+            "cardname": "gemhide sliver",
+            "bottomConnector": "sliver",
+            "blankMap": "_______ ______",
+            "isSolved": false
+        },
+        {
+            "isFirstWord": false,
+            "isLastWord": false,
+            "topConnector": "sliver",
+            "cardname": "sliver hivelord",
+            "bottomConnector": "lord",
+            "blankMap": "______ ________",
+            "isSolved": false
+        },
+        {
+            "isFirstWord": false,
+            "isLastWord": false,
+            "topConnector": "lord",
+            "cardname": "lord of atlantis",
+            "bottomConnector": "tis",
+            "blankMap": "____ __ ________",
+            "isSolved": false
+        },
+        {
+            "isFirstWord": false,
+            "isLastWord": false,
+            "topConnector": "tis",
+            "cardname": "tishana, voice of thunder",
+            "bottomConnector": "under",
+            "blankMap": "_______, _____ __ _______",
+            "isSolved": false
+        },
+        {
+            "isFirstWord": false,
+            "isLastWord": false,
+            "topConnector": "under",
+            "cardname": "underworld breach",
+            "bottomConnector": "reach",
+            "blankMap": "__________ ______",
+            "isSolved": false
+        },
+        {
+            "isFirstWord": false,
+            "isLastWord": true,
+            "topConnector": "reach",
+            "cardname": "reach the horizon",
+            "bottomConnector": "",
+            "blankMap": "_____ ___ _______",
+            "isSolved": false
+        }
+    ]
+}
