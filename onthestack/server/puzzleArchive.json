@@ -1,5 +1,5 @@
 {
-    "length": 1,
+    "length": 2,
     "puzzles": [
         {
             "length": null,
@@ -69,6 +69,75 @@
                 }
             ],
             "date": "Wednesday, January 07, 2026"
+        },
+        {
+            "length": null,
+            "words": [
+                {
+                    "isFirstWord": true,
+                    "isLastWord": false,
+                    "topConnector": "",
+                    "cardname": "sanguine bond",
+                    "bottomConnector": "bond",
+                    "blankMap": "________ ____",
+                    "isSolved": true
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "bond",
+                    "cardname": "bonds of mortality",
+                    "bottomConnector": "mortality",
+                    "blankMap": "_____ __ _________",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "mortality",
+                    "cardname": "mortality spear",
+                    "bottomConnector": "ear",
+                    "blankMap": "_________ _____",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "ear",
+                    "cardname": "earthquake",
+                    "bottomConnector": "quake",
+                    "blankMap": "__________",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "quake",
+                    "cardname": "quakebringer",
+                    "bottomConnector": "bringer",
+                    "blankMap": "____________",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "bringer",
+                    "cardname": "bringer of the last gift",
+                    "bottomConnector": "gift",
+                    "blankMap": "_______ __ ___ ____ ____",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": true,
+                    "topConnector": "gift",
+                    "cardname": "gifts ungiven",
+                    "bottomConnector": "",
+                    "blankMap": "_____ _______",
+                    "isSolved": false
+                }
+            ],
+            "date": "Thursday, January 08, 2026"
         }
     ]
 }
