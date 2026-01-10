@@ -54,7 +54,7 @@ const infoText = "Welcome to OnTheStack! A daily puzzle is comprised of 7 cards 
 
 <style>
 html, body {
-  font-size: 16pt;
+  font-size: 14pt;
 }
 .info-button {
   font-size: 0.3rem;
