@@ -1,18 +1,45 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, onUnmounted, watch, computed } from 'vue';
 import Puzzle from './components/puzzle/Puzzle.vue'
 import { useMetaStore } from '@/stores/meta';
+import { usePuzzleStore } from '@/stores/puzzle';
 import '@awesome.me/webawesome/dist/components/dialog/dialog.js';
 
 const showInfo = ref(false)
 const metaStore = useMetaStore()
 
-//document.otsIcon.classList.toggle('mobile', metaStore.isMobile);
+const now = ref(new Date());
+const tonight = new Date();
+tonight.setHours(24, 1, 0, 0); // 12:01 AM tonight
+let timer;
 
 onMounted(() => {
   document.title = 'On The Stack'
   metaStore.init()
+
+  timer = setInterval(() => {
+    now.value = new Date();
+  }, 1000);
 })
+
+onUnmounted(() => {
+  clearInterval(timer);
+});
+
+metaStore.countdownToNextPuzzle = computed(() => {
+  const diff = tonight - now.value;
+
+  if (diff <= 0) return '00:00:00';
+
+  const totalSeconds = Math.floor(diff / 1000);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  return `${hours.toString().padStart(2, '0')}:` +
+         `${minutes.toString().padStart(2, '0')}:` +
+         `${seconds.toString().padStart(2, '0')}`;
+});
 
 watch(
   () => metaStore.isOnMobile,

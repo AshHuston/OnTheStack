@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 export const usePuzzleStore = defineStore('puzzle', () => {
   const puzzle = ref(null)
-
+  const isSolved = ref(null)
   function initialize(puzzleInstance) { puzzle.value = puzzleInstance }
 
   function updateBlankMap(index, isEnd = false, hint = false) {
@@ -25,6 +25,7 @@ export const usePuzzleStore = defineStore('puzzle', () => {
 
   return {
     puzzle,
+    isSolved,
     initialize,
     updateBlankMap
   }

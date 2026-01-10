@@ -3,6 +3,7 @@
 import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import { usePuzzleStore } from '../../../stores/puzzle.js'
 import { useSettingsStore } from '../../../stores/settings.js'
+import { useMetaStore } from '@/stores/meta.js'
 import CardName from './CardName.vue'
 import { sanitizeString } from '../../../helpers.js'
 import '@awesome.me/webawesome/dist/components/dialog/dialog.js';
@@ -16,6 +17,7 @@ const guess = ref('')
 const contentScale = ref(1)
 const puzzleStore = usePuzzleStore()
 const settingsStore = useSettingsStore()
+const metaStore = useMetaStore()
 
 puzzleStore.initialize({
   length: null,
@@ -39,7 +41,7 @@ const solvedStates = computed(() => {
     })
 })
 
-const puzzleSolved = computed(() => {
+puzzleStore.isSolved = computed(() => {
     return !solvedStates.value.includes(false)
 })
 
@@ -149,8 +151,8 @@ onUnmounted(() => {
         </div>
     </div>
 
-    <wa-dialog :open="puzzleSolved && doneLoading" label="Congratulations">
-        You won!!! Come back tomorrow for a new puzzle!
+    <wa-dialog :open="puzzleStore.isSolved && doneLoading" label="Congratulations">
+        You won!!! Come back in {{ metaStore.countdownToNextPuzzle }} for a new puzzle!
         <template v-slot:footer>
             <wa-button  variant="brand" data-dialog="close">Close</wa-button>
         </template>

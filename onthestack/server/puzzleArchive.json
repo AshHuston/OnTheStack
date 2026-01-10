@@ -69,6 +69,75 @@
                 }
             ],
             "date": "Wednesday, January 07, 2026"
+        },
+        {
+            "length": null,
+            "words": [
+                {
+                    "isFirstWord": true,
+                    "isLastWord": false,
+                    "topConnector": "",
+                    "cardname": "lodestone myr",
+                    "bottomConnector": "myr",
+                    "blankMap": "_________ ___",
+                    "isSolved": true
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "myr",
+                    "cardname": "myr retriever",
+                    "bottomConnector": "ever",
+                    "blankMap": "___ _________",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "ever",
+                    "cardname": "everflowing chalice",
+                    "bottomConnector": "ice",
+                    "blankMap": "___________ _______",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "ice",
+                    "cardname": "ice out",
+                    "bottomConnector": "out",
+                    "blankMap": "___ ___",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "out",
+                    "cardname": "outpost siege",
+                    "bottomConnector": "siege",
+                    "blankMap": "_______ _____",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "siege",
+                    "cardname": "siege veteran",
+                    "bottomConnector": "ran",
+                    "blankMap": "_____ _______",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": true,
+                    "topConnector": "ran",
+                    "cardname": "ranger-captain of eos",
+                    "bottomConnector": "",
+                    "blankMap": "______-_______ __ ___",
+                    "isSolved": false
+                }
+            ],
+            "date": "Saturday, January 10, 2026"
         }
     ]
 }

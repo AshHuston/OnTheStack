@@ -3,7 +3,8 @@ import { defineStore } from 'pinia'
 
 export const useMetaStore = defineStore('meta', () => {
   const isOnMobile = ref(null)
-  
+  const countdownToNextPuzzle = ref('')
+
   const init = () => {
       const media = window.matchMedia('(max-width: 768px)');
 
@@ -16,5 +17,9 @@ export const useMetaStore = defineStore('meta', () => {
       media.addEventListener('change', update);
     };
 
-  return { isOnMobile, init }
+  return { 
+    isOnMobile,
+    countdownToNextPuzzle,
+    init 
+  }
 })
