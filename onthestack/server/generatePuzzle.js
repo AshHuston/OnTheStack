@@ -1,6 +1,6 @@
 import { Puzzle } from './puzzle.js'
 import { getFormattedDate, getFormattedTimeStamp, shuffledClone } from './helpers.js';
-import puzzleArchive from './puzzleArchive.json' with {type: 'json'}
+//import puzzleArchive from './puzzleArchive.json' with {type: 'json'}
 import edhRecTop10k from './cardPools/edhrecTop10k.json' with {type: 'json'}
 import fs from 'fs/promises'
 
@@ -85,14 +85,21 @@ function ensureFrontFaceCardName(card) {
 }
 
 /**
- * Checks if the most recently archived puzzle is up-to-date. If not, generates a new one with the passed cardPool and numOfCards and archives it.
+ * Checks if the most recently archived puzzle is up-to-date. If not, generates one and archives it.
  * @param {number} [numOfCards]
  * @param {MtgCard[]} [cardPool]
  */
-export function ensureCurrentDatePuzzleInStore(numOfCards = 7, cardPool = edhRecTop10k){
+export async function ensureCurrentDatePuzzleInStore(numOfCards = 7, cardPool = edhRecTop10k){
     const currentDate = getFormattedDate()
+    const puzzleArchive = JSON.parse(
+      await fs.readFile(
+        new URL('./puzzleArchive.json', import.meta.url),
+        'utf8'
+      )
+    );
+
     if (puzzleArchive.puzzles.at(-1).date === currentDate){ 
-      console.log(`Archive latest date: ${puzzleArchive.puzzles.at(-1).date}\n Current date: ${currentDate}\nNo puzzle generated.`); 
+      console.log(`  Archive latest date: ${puzzleArchive.puzzles.at(-1).date}\n  Current date: ${currentDate}\nNo puzzle generated.`); 
       return;
     }
 
@@ -103,8 +110,6 @@ export function ensureCurrentDatePuzzleInStore(numOfCards = 7, cardPool = edhRec
     archivePuzzle(puzzleArchive)
     savePuzzle(length, words)
 }
-
-
 
 async function savePuzzle(length, words) {
   const data = JSON.stringify({ length, words }, null, 4)

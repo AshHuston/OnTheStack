@@ -22,6 +22,7 @@ export function getFormattedDate(){
   return date.toLocaleDateString('en-US', options)
 }
 
+//Probably remove
 export function getFormattedTimeStamp(){
   const date = new Date()
   return date.toISOString()
