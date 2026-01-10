@@ -3,6 +3,18 @@ import { defineStore } from 'pinia'
 
 export const useMetaStore = defineStore('meta', () => {
   const isOnMobile = ref(null)
+  
+  const init = () => {
+      const media = window.matchMedia('(max-width: 768px)');
 
-  return { isOnMobile }
+      const update = () => {
+        console.log("cahnegs screen size")
+        isOnMobile.value = media.matches;
+      };
+
+      update(); // initial value
+      media.addEventListener('change', update);
+    };
+
+  return { isOnMobile, init }
 })

@@ -1,5 +1,5 @@
 {
-    "length": 3,
+    "length": 4,
     "puzzles": [
         {
             "length": null,
@@ -207,6 +207,75 @@
                 }
             ],
             "date": "Friday, January 09, 2026"
+        },
+        {
+            "length": null,
+            "words": [
+                {
+                    "isFirstWord": true,
+                    "isLastWord": false,
+                    "topConnector": "",
+                    "cardname": "olórin's searing light",
+                    "bottomConnector": "light",
+                    "blankMap": "______'_ _______ _____",
+                    "isSolved": true
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "light",
+                    "cardname": "lightning-rig crew",
+                    "bottomConnector": "rew",
+                    "blankMap": "_________-___ ____",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "rew",
+                    "cardname": "rewind",
+                    "bottomConnector": "wind",
+                    "blankMap": "______",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "wind",
+                    "cardname": "windfall",
+                    "bottomConnector": "all",
+                    "blankMap": "________",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "all",
+                    "cardname": "all will be one",
+                    "bottomConnector": "one",
+                    "blankMap": "___ ____ __ ___",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "one",
+                    "cardname": "one with nature",
+                    "bottomConnector": "ure",
+                    "blankMap": "___ ____ ______",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": true,
+                    "topConnector": "ure",
+                    "cardname": "ureni, the song unending",
+                    "bottomConnector": "",
+                    "blankMap": "_____, ___ ____ ________",
+                    "isSolved": false
+                }
+            ],
+            "date": "Saturday, January 10, 2026"
         }
     ]
 }
