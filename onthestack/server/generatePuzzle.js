@@ -98,7 +98,7 @@ export async function ensureCurrentDatePuzzleInStore(numOfCards = 7, cardPool = 
       )
     );
 
-    if (puzzleArchive.puzzles.at(-1).date === currentDate){ 
+    if (puzzleArchive.puzzles.at(-1)?.date === currentDate){ 
       console.log(`  Archive latest date: ${puzzleArchive.puzzles.at(-1).date}\n  Current date: ${currentDate}\nNo puzzle generated.`); 
       return;
     }
@@ -127,10 +127,12 @@ async function savePuzzle(length, words) {
  * @param {Object} puzzleArchive - The object to save
  */
 async function archivePuzzle(puzzleArchive) {
+  
   try {
     const data = JSON.stringify(puzzleArchive, null, 4)
     await fs.writeFile('./server/puzzleArchive.json', data, 'utf8')
     console.log(getFormattedTimeStamp(), 'Puzzle archive saved successfully!')
+    console.log(puzzleArchive.puzzles.at(-1))
   } catch (err) {
     console.error(getFormattedTimeStamp(), 'Failed to save puzzle archive:', err)
   }

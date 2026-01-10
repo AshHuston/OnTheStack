@@ -3,6 +3,7 @@ import { ref, onMounted, watch } from 'vue';
 import Puzzle from './components/puzzle/Puzzle.vue'
 import { useMetaStore } from '@/stores/meta';
 import '@awesome.me/webawesome/dist/components/dialog/dialog.js';
+import { getFormattedDate, getFormattedTimeStamp } from '@/helpers';
 
 const showInfo = ref(false)
 const metaStore = useMetaStore()
@@ -31,9 +32,17 @@ const onClose = () => {
 }
 
 const infoText = "Welcome to OnTheStack! A daily puzzle is comprised of 7 cards from the EDHrec top 10,000 cards. Their names chain together so the end of one card is a hint for the beginning of the next one.\n\nThe checkboxes are settings that may make your game a bit easier.\n\n\nGood luck!\n-The Dev"
+const wipText = "On The Stack is a work-in-progress. Thank you for being patient as I improve it!   -The Dev"
+
+
+const now = new Date();
+const numOfHours = 13.5
+const hoursFromNow = `${getFormattedDate(new Date(now.getTime() + numOfHours*(60 * 60 * 1000)))} ----- ${getFormattedTimeStamp(new Date(now.getTime() + numOfHours*(60 * 60 * 1000)))}`
+
 </script>
 
 <template :class="{ mobile: metaStore.isOnMobile }">
+  {{  hoursFromNow }}
   <div class="wa-cluster wa-align-items-start wa-gap-0">
     <img 
       src="../OnTheStack.png"
@@ -59,6 +68,17 @@ const infoText = "Welcome to OnTheStack! A daily puzzle is comprised of 7 cards 
     @wa-after-hide="onClose"
   >
     {{ infoText }}
+    <template v-slot:footer>
+        <wa-button  variant="brand" data-dialog="close">Close</wa-button>
+    </template>
+  </wa-dialog>
+
+  <!-- IMPROVE: Make this a callout or something less intrusive -->
+    <wa-dialog 
+    open="true" 
+    label="Work in Progress"
+  >
+    {{ wipText }}
     <template v-slot:footer>
         <wa-button  variant="brand" data-dialog="close">Close</wa-button>
     </template>
