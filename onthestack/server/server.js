@@ -56,6 +56,6 @@ app.listen(PORT, () => {
 
 // ******** Startup tasks
 startChronJobs()
-//ensureCurrentDatePuzzleInStore() // double check that... may need to rename
+ensureCurrentDatePuzzleInStore() // double check that... may need to rename
 
 

@@ -5,9 +5,9 @@ import { getFormattedDate, getFormattedTimeStamp } from './helpers.js'
 export function startChronJobs(){
     // Every day at 12:01am New York time
     cron.schedule(
-        '*/2 * * * *',//'1 0 * * *', 
+        '1 0 * * *', 
         () => {
-            console.log('Attempting puzzle verification.', getFormattedTimeStamp())
+            console.log('Attempting puzzle verification.', getFormattedTimeStamp(), 'dont forget to subtract 5hrs')
             ensureCurrentDatePuzzleInStore()
         },
         {

@@ -1,6 +1,5 @@
 import { Puzzle } from './puzzle.js'
 import { getFormattedDate, getFormattedTimeStamp, shuffledClone } from './helpers.js';
-//import puzzleArchive from './puzzleArchive.json' with {type: 'json'}
 import edhRecTop10k from './cardPools/edhrecTop10k.json' with {type: 'json'}
 import fs from 'fs/promises'
 
@@ -47,7 +46,6 @@ export function generatePuzzle(numOfCards, cardPool, startCard, endCard) {
             counter++
             for (let i=0; i<lookingAt.startWords.length; i++) {
                 if (prevWord.endWords.includes(lookingAt.startWords[i])) {
-                    // Add next step
                     puzzle.addCard({
                         isFirstWord: false,
                         isLastWord: false,
@@ -56,13 +54,8 @@ export function generatePuzzle(numOfCards, cardPool, startCard, endCard) {
                         bottomConnector: ""
                     })
 
-                    // Set as prevCard
                     prevWord = lookingAt
-
-                    // Note that we added a card
                     hasNotAddedACard = false
-
-                    //Exit while loop #2
                     counter = -1
                 }
             }
@@ -90,11 +83,6 @@ function ensureFrontFaceCardName(card) {
  * @param {MtgCard[]} [cardPool]
  */
 export async function ensureCurrentDatePuzzleInStore(numOfCards = 7, cardPool = edhRecTop10k){
-
-  // //test stuff
-  // const tonight = new Date();
-  // tonight.setHours(24, 1, 0, 0)
-
     const currentDate = getFormattedDate()
     const puzzleArchive = JSON.parse(
       await fs.readFile(
@@ -116,14 +104,14 @@ export async function ensureCurrentDatePuzzleInStore(numOfCards = 7, cardPool = 
     savePuzzle(length, words)
 }
 
+// IMPROVE: Combine these with a setAsDailyPuzzle option maybe?
 async function savePuzzle(length, words) {
   const data = JSON.stringify({ length, words }, null, 4)
-
   try {
     await fs.writeFile('./server/dailypuzzle.json', data, 'utf8')
-    console.log(getFormattedTimeStamp(), 'Puzzle saved successfully!')
+    console.log('Puzzle saved successfully!')
   } catch (err) {
-    console.error(getFormattedTimeStamp(), 'Failed to save puzzle:', err)
+    console.error('Failed to save puzzle:', err)
   }
 }
 
@@ -132,13 +120,12 @@ async function savePuzzle(length, words) {
  * @param {Object} puzzleArchive - The object to save
  */
 async function archivePuzzle(puzzleArchive) {
-  
   try {
     const data = JSON.stringify(puzzleArchive, null, 4)
     await fs.writeFile('./server/puzzleArchive.json', data, 'utf8')
-    console.log(getFormattedTimeStamp(), 'Puzzle archive saved successfully!')
-    console.log(puzzleArchive.puzzles.at(-1))
+    console.log('Puzzle archive saved successfully!')
+    console.log('puzzle date:', puzzleArchive.puzzles.at(-1).date)
   } catch (err) {
-    console.error(getFormattedTimeStamp(), 'Failed to save puzzle archive:', err)
+    console.error('Failed to save puzzle archive:', err)
   }
 }
