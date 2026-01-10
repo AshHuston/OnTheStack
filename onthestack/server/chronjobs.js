@@ -1,6 +1,6 @@
 import cron from 'node-cron'
 import { ensureCurrentDatePuzzleInStore } from './generatePuzzle.js'
-import { getFormattedDate, get } from './helpers.js'
+import { getFormattedDate } from './helpers.js'
 
 export function startChronJobs(){
     // Every day at 12:01am New York time
