@@ -37,12 +37,15 @@ const wipText = "On The Stack is a work-in-progress. Thank you for being patient
 
 const now = new Date();
 const numOfHours = 13.5
-const hoursFromNow = `${getFormattedDate(new Date(now.getTime() + numOfHours*(60 * 60 * 1000)))} ----- ${getFormattedTimeStamp(new Date(now.getTime() + numOfHours*(60 * 60 * 1000)))}`
+const tonight = new Date();
+tonight.setHours(24, 1, 0, 0);
+const jobTime = getFormattedDate(tonight)
+//const hoursFromNow = `${getFormattedDate(new Date(now.getTime() + numOfHours*(60 * 60 * 1000)))} ----- ${getFormattedTimeStamp(new Date(now.getTime() + numOfHours*(60 * 60 * 1000)))}`
 
 </script>
 
 <template :class="{ mobile: metaStore.isOnMobile }">
-  {{  hoursFromNow }}
+  {{  jobTime }}
   <div class="wa-cluster wa-align-items-start wa-gap-0">
     <img 
       src="../OnTheStack.png"
