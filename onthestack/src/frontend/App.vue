@@ -7,7 +7,7 @@ import '@awesome.me/webawesome/dist/components/dialog/dialog.js';
 const metaStore = useMetaStore()
 const showInfo = ref(false)
 
-document.otsIcon.classList.toggle('mobile', isMobile);
+document.otsIcon.classList.toggle('mobile', metaStore.isMobile);
 
 onMounted(() => {
   document.title = 'On The Stack'
