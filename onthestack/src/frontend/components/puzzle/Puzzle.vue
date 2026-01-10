@@ -9,6 +9,7 @@ import { sanitizeString } from '../../../helpers.js'
 import '@awesome.me/webawesome/dist/components/dialog/dialog.js';
 import '@awesome.me/webawesome/dist/components/input/input.js';
 import cardGuessField from './CardGuessField.vue'
+import CardImage from './CardImage.vue'
 
 const dailyPuzzle = ref(null)
 const doneLoading = ref(false)
@@ -48,6 +49,7 @@ puzzleStore.isSolved = computed(() => {
 function updatePuzzle() {
     if(puzzleStore.puzzle === null || puzzleStore.puzzle.value === null){ return }
     const lastSolvedWord = puzzleStore.puzzle.words[solvedStates.value.lastIndexOf(true)]
+    metaStore.lastSolvedCard = lastSolvedWord
     const nextCard = puzzleStore.puzzle.words[solvedStates.value.lastIndexOf(true)+1]
     if ( !lastSolvedWord.isLastWord ) { 
         puzzleStore.updateBlankMap(solvedStates.value.lastIndexOf(true)+1)
@@ -129,16 +131,19 @@ onUnmounted(() => {
 
 <template>
     <div class="wa-stack wa-gap-m wa-align-items-center">
-        <div class="wa-cluster" style="margin-top: -4rem;">
-            <button v-if="settingsStore.showGeneratePuzzleButton === true" @click="newPuzzle(7)">Generate Puzzle</button>
-            
+        <div class="inputStuff wa-stack wa-align-items-center" :class="{ mobile: metaStore.isOnMobile}">
+            <div v-if="metaStore.isOnMobile" class="wa-cluster wa-gap-xs mobile hintButton">
+                <button v-if="settingsStore.showGeneratePuzzleButton === true" @click="newPuzzle(7)">Generate Puzzle</button>
+                <button @click="giveHnt()">Hint</button>
+            </div>
+            <cardGuessField v-model:guess="guess" :showCardSuggestions="settingsStore.autoComplete" />
+            <div v-if="!metaStore.isOnMobile" class="wa-cluster">
+                <button v-if="settingsStore.showGeneratePuzzleButton === true" @click="newPuzzle(7)">Generate Puzzle</button>
+                <button @click="giveHnt()">Hint</button>
+            </div>
         </div>
 
-        <div class="wa-cluster wa-align-items-end" >
-        <cardGuessField v-model:guess="guess" :showCardSuggestions="settingsStore.autoComplete" />
-        <button @click="giveHnt()">Hint</button></div>
-
-        <div class="wa-stack card-name-stack">
+        <div v-if="!metaStore.isOnMobile" class="wa-stack card-name-stack">
             <CardName
                 v-for="(cardData, index, key) in puzzleStore.puzzle.words"
                 v-bind:key
@@ -146,6 +151,27 @@ onUnmounted(() => {
                 :cardData
                 :isSolved="solvedStates[index]"
                 :class="{ 'card-name-card': index>0}"
+                :style="{'--contentScale': contentScale }"
+            />
+        </div>
+        <div v-else class="wa-stack card-name-stack mobile">
+            <div class="card-stack">
+                <!-- <CardImage
+                    v-for="(cardData, index, key) in puzzleStore.puzzle.words.filter((_, index) => solvedStates[index])"
+                    :key
+                    :card-name="cardData.cardname"
+                    is-solved="true"
+                    class="stacked-card"
+                /> -->
+                <CardImage :card-name="metaStore.lastSolvedCard.cardname" is-solved="true" />
+            </div>
+            <CardName
+                v-for="(cardData, index, key) in puzzleStore.puzzle.words"
+                v-bind:key
+                :index
+                :cardData
+                :isSolved="solvedStates[index]"
+                
                 :style="{'--contentScale': contentScale }"
             />
         </div>
@@ -165,10 +191,41 @@ onUnmounted(() => {
 .card-name-stack {
     width: 60%;
 }
+.card-name-stack.mobile {
+    width: 90%;
+}
+
+.card-stack {
+    position: relative;
+    width: 200px;   /* card width */
+}
+.stacked-card {
+    position: absolute;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
 .card-name-card {
     margin-top: calc(-50px * var(--contentScale));
 }
 .page-padding{
     padding-bottom: 25rem;
+}
+
+.inputStuff {
+    margin-top: -4rem;
+    /* margin-left: auto; */
+}
+.inputStuff.mobile {
+    margin-top: 0;
+    
+}
+
+.hintButton {
+
+}
+.hintButton.mobile {
+    margin-top: -3rem;
+    margin-left: auto;
 }
 </style>

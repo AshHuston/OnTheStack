@@ -2,10 +2,12 @@
 import '@awesome.me/webawesome/dist/components/card/card.js';
 import { sanitizeString } from '@/helpers';
 import { ref, onMounted, watch } from 'vue';
+import { useMetaStore } from '@/stores/meta';
 
 const props = defineProps({
-  cardName: Object,
-  isSolved: Boolean
+  cardName: String,
+  isSolved: Boolean,
+  index: Number
 })
 
 async function setCardImageUrl(cardname) {
@@ -47,6 +49,8 @@ const loading = ref(true);
 const error = ref(false);
 const isHovering = ref(false)
 const hoveredImg = ref(null)
+
+const metaStore = useMetaStore()
 
 const mouseX = ref(0)
 const mouseY = ref(0)
@@ -103,16 +107,18 @@ function onImageError(){
     <div v-if="isSolved">
         <div v-if="loading">Loading image…</div>
         <div v-else-if="error">Failed to load image</div>
-        <img 
-            v-else 
+        <img
+            v-else
             :src="imageUrl" 
             alt="Result image"
             class="card-image"
+            :class="{ mobile: metaStore.isOnMobile}"
             @mouseenter="isHovering = true"
             @mouseleave="isHovering = false"
             @mousemove="onMouseMove"
             @error="onImageError"
         />
+        
     </div>
     <div v-else>
         <img  
@@ -148,7 +154,13 @@ function onImageError(){
 
 <style>
 .card-image {
-    height: 8rem;
+    width: 7rem;
+    height: auto;
+}
+.card-image.mobile{
+    /* position: absolute;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2); */
 }
 .hover-container {
     position: fixed;

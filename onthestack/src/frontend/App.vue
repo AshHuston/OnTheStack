@@ -2,11 +2,14 @@
 import { ref, onMounted, onUnmounted, watch, computed } from 'vue';
 import Puzzle from './components/puzzle/Puzzle.vue'
 import { useMetaStore } from '@/stores/meta';
-import { usePuzzleStore } from '@/stores/puzzle';
 import '@awesome.me/webawesome/dist/components/dialog/dialog.js';
+import '@awesome.me/webawesome/dist/components/callout/callout.js';
+import '@awesome.me/webawesome/dist/components/icon/icon.js';
+import { usePuzzleStore } from '@/stores/puzzle';
 
 const showInfo = ref(false)
 const metaStore = useMetaStore()
+const puzzleStore = usePuzzleStore()
 
 const now = ref(new Date());
 const tonight = new Date();
@@ -18,7 +21,7 @@ onMounted(() => {
   metaStore.init()
 
   timer = setInterval(() => {
-    now.value = new Date();
+    if(puzzleStore.isSolved){now.value = new Date()};
   }, 1000);
 })
 
@@ -69,17 +72,15 @@ const wipText = "On The Stack is a work-in-progress. Thank you for being patient
       :class="{ mobile: metaStore.isOnMobile }"
       >
 
-    <wa-button 
+    <wa-icon 
+      name="circle-info" 
+      label="Info"
       variant="brand" 
-      appearance="outlined"
-      pill
-      size="small"
       class="info-button"
       :class="{ mobile: metaStore.isOnMobile }"
       @click="onClick"
-    >
-      <wa-icon name="info" label="Info"></wa-icon>
-    </wa-button>
+    ></wa-icon>
+
   </div>
   <wa-dialog 
     :open="showInfo" 
@@ -94,14 +95,19 @@ const wipText = "On The Stack is a work-in-progress. Thank you for being patient
 
   <!-- IMPROVE: Make this a callout or something less intrusive -->
     <wa-dialog 
-    open="true" 
-    label="Work in Progress"
-  >
+      open="true" 
+      label="Work in Progress"
+    >
     {{ wipText }}
     <template v-slot:footer>
         <wa-button  variant="brand" data-dialog="close">Close</wa-button>
     </template>
   </wa-dialog>
+
+  <!-- <wa-callout>
+      <wa-icon slot="icon" name="beer-mug-empty" variant="plain"></wa-icon>
+    {{ wipText }}
+  </wa-callout> -->
 
   <Puzzle/>
 </template>
@@ -116,12 +122,14 @@ html.mobile {
 }
 
 .info-button {
-  font-size: 0.3rem;
-  margin-top: .5rem;
+  font-size: 1.2rem;
+  color: var(--wa-color-brand-on-normal);
+  margin: 0.6rem 0;
+  cursor: pointer;
 }
 .info-button.mobile {
-  font-size: 0.5rem;
-  margin-top: .5rem;
+  font-size: 1.75rem;
+  margin-top: 1.5rem;
 }
 
 .logo {

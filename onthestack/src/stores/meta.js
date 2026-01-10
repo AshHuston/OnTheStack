@@ -4,6 +4,7 @@ import { defineStore } from 'pinia'
 export const useMetaStore = defineStore('meta', () => {
   const isOnMobile = ref(null)
   const countdownToNextPuzzle = ref('')
+  const lastSolvedCard = ref(null)
 
   const init = () => {
       const media = window.matchMedia('(max-width: 768px)');
@@ -20,6 +21,7 @@ export const useMetaStore = defineStore('meta', () => {
   return { 
     isOnMobile,
     countdownToNextPuzzle,
+    lastSolvedCard,
     init 
   }
 })

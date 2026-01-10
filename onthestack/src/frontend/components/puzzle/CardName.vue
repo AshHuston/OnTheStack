@@ -3,6 +3,7 @@
 import HighlightedCardname from './HighlightedString.vue'
 import '@awesome.me/webawesome/dist/components/card/card.js';
 import CardImage from './CardImage.vue';
+import { useMetaStore } from '@/stores/meta';
 
 const props = defineProps({
   index: Number,
@@ -10,11 +11,19 @@ const props = defineProps({
   isSolved: Boolean
 })
 
+const metaStore = useMetaStore()
+
+// const isLastCardSolved = props.cardData.cardname === metaStore.lastSolvedCard.cardname
+
 </script>
 
 <template>
   <div :class="{'wa-flank:end': index%2 == 1, 'wa-flank': index%2 == 0}">
-    <CardImage v-if="index%2 == 0" :isSolved="isSolved" :card-name="props.cardData.cardname" />
+    <CardImage 
+      v-if="index%2 == 0 && !metaStore.isOnMobile" 
+      :isSolved="isSolved" 
+      :card-name="props.cardData.cardname" 
+    />
     <wa-card>
       <HighlightedCardname 
         :text="isSolved ? props.cardData.cardname : props.cardData.blankMap"
@@ -23,7 +32,11 @@ const props = defineProps({
       />
       
     </wa-card>
-    <CardImage v-if="index%2 == 1" :isSolved="isSolved" :card-name="props.cardData.cardname" />
+    <CardImage
+      v-if="index%2 == 1  && !metaStore.isOnMobile"
+      :isSolved="isSolved"
+      :card-name="props.cardData.cardname"
+    />
   </div>
 </template>
 

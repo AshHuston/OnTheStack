@@ -4,8 +4,10 @@ import { ref } from 'vue'
 import { useSettingsStore } from '@/stores/settings';
 import '@awesome.me/webawesome/dist/components/input/input.js';
 import '@awesome.me/webawesome/dist/components/checkbox/checkbox.js';
+import { useMetaStore } from '@/stores/meta';
 
 const settingsStore = useSettingsStore()
+const metaStore = useMetaStore()
 
 const props = defineProps({
   guess: String,
@@ -108,27 +110,6 @@ const onChangeShowFirstLetter = (event) => {
     background: white;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
-
-
-
-
-
-.autocomplete {
-        /* directly below input */
-  left: 0;
-  width: 100%;
-  
- 
-  border: 1px solid #ccc;
- 
-}
-
-
-
-
-
-
-
 
 .list-item {
     padding: 8px 12px;       /* spacing inside each item */
