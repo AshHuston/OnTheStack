@@ -91,11 +91,11 @@ function ensureFrontFaceCardName(card) {
  */
 export async function ensureCurrentDatePuzzleInStore(numOfCards = 7, cardPool = edhRecTop10k){
 
-  //test stuff
-  const tonight = new Date();
-  tonight.setHours(24, 1, 0, 0)
+  // //test stuff
+  // const tonight = new Date();
+  // tonight.setHours(24, 1, 0, 0)
 
-    const currentDate = getFormattedDate(tonight)
+    const currentDate = getFormattedDate()
     const puzzleArchive = JSON.parse(
       await fs.readFile(
         new URL('./puzzleArchive.json', import.meta.url),
