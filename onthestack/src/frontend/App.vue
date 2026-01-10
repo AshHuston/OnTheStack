@@ -1,9 +1,13 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import Puzzle from './components/puzzle/Puzzle.vue'
+import { useMetaStore } from '@/stores/meta';
 import '@awesome.me/webawesome/dist/components/dialog/dialog.js';
 
+const metaStore = useMetaStore()
 const showInfo = ref(false)
+
+document.otsIcon.classList.toggle('mobile', isMobile);
 
 onMounted(() => {
   document.title = 'On The Stack'
