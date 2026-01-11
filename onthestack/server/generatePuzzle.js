@@ -113,7 +113,7 @@ async function savePuzzle(length, words) {
   try {
     await fs.writeFile('./server/dailyPuzzle.json', data, 'utf8')
     console.log('Puzzle saved successfully!')
-    console.log(data)
+   // console.log(data)
   } catch (err) {
     console.error('Failed to save puzzle:', err)
   }
@@ -128,7 +128,7 @@ async function archivePuzzle(puzzleArchive) {
     const data = JSON.stringify(puzzleArchive, null, 4)
     await fs.writeFile('./server/puzzleArchive.json', data, 'utf8')
     console.log('Puzzle archive saved successfully!')
-    console.log('puzzle date:', puzzleArchive.puzzles.at(-1))
+   // console.log('puzzle date:', puzzleArchive.puzzles.at(-1))
   } catch (err) {
     console.error('Failed to save puzzle archive:', err)
   }
