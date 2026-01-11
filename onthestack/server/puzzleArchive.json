@@ -1,5 +1,5 @@
 {
-    "length": 2,
+    "length": 3,
     "puzzles": [
         {
             "length": null,
@@ -138,6 +138,75 @@
                 }
             ],
             "date": "Saturday, January 10, 2026"
+        },
+        {
+            "length": null,
+            "words": [
+                {
+                    "isFirstWord": true,
+                    "isLastWord": false,
+                    "topConnector": "",
+                    "cardname": "ainok bond-kin",
+                    "bottomConnector": "kin",
+                    "blankMap": "_____ ____-___",
+                    "isSolved": true
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "kin",
+                    "cardname": "king of the pride",
+                    "bottomConnector": "ride",
+                    "blankMap": "____ __ ___ _____",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "ride",
+                    "cardname": "riders of rohan",
+                    "bottomConnector": "han",
+                    "blankMap": "______ __ _____",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "han",
+                    "cardname": "hancock, ghoulish mayor",
+                    "bottomConnector": "mayor",
+                    "blankMap": "_______, ________ _____",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "mayor",
+                    "cardname": "mayor of avabruck",
+                    "bottomConnector": "avabruck",
+                    "blankMap": "_____ __ ________",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "avabruck",
+                    "cardname": "avabruck caretaker",
+                    "bottomConnector": "caretaker",
+                    "blankMap": "________ _________",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": true,
+                    "topConnector": "caretaker",
+                    "cardname": "caretaker's talent",
+                    "bottomConnector": "",
+                    "blankMap": "_________'_ ______",
+                    "isSolved": false
+                }
+            ],
+            "date": "Sunday, January 11, 2026"
         }
     ]
 }
