@@ -17,14 +17,16 @@ export function startChronJobs(){
     )
 
     // Every hour
-    cron.schedule('0 * * * *', async () => {
+    cron.schedule('*/10 * * * *', async () => {
         console.log(getFormattedDate(), 'Server healthy')
-        const archive = JSON.parse(
-          await fs.readFile(
-            new URL('./puzzleArchive.json', import.meta.url),
-            'utf8'
-          )
-        );
-        console.log(archive)
+
+        ensureCurrentDatePuzzleInStore(true)
+        // const archive = JSON.parse(
+        //   await fs.readFile(
+        //     new URL('./puzzleArchive.json', import.meta.url),
+        //     'utf8'
+        //   )
+        // );
+        // console.log(archive)
     })
 }

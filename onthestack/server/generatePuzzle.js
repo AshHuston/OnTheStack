@@ -82,7 +82,10 @@ function ensureFrontFaceCardName(card) {
  * @param {number} [numOfCards]
  * @param {MtgCard[]} [cardPool]
  */
-export async function ensureCurrentDatePuzzleInStore(numOfCards = 7, cardPool = edhRecTop10k){
+export async function ensureCurrentDatePuzzleInStore(skipDateValidation = false){
+    const numOfCards = 7
+    const cardPool = edhRecTop10k
+
     const currentDate = getFormattedDate()
     const puzzleArchive = JSON.parse(
       await fs.readFile(
@@ -91,7 +94,7 @@ export async function ensureCurrentDatePuzzleInStore(numOfCards = 7, cardPool = 
       )
     );
 
-    if (puzzleArchive.puzzles.at(-1)?.date === currentDate){ 
+    if (puzzleArchive.puzzles.at(-1)?.date === currentDate && !skipDateValidation){ 
       console.log(`  Archive latest date: ${puzzleArchive.puzzles.at(-1).date}\n  Current date: ${currentDate}\nNo puzzle generated.`); 
       return;
     }
