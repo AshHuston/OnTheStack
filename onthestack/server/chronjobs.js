@@ -1,7 +1,6 @@
 import cron from 'node-cron'
 import { ensureCurrentDatePuzzleInStore } from './generatePuzzle.js'
 import { getFormattedDate, getFormattedTimeStamp } from './helpers.js'
-import fs from 'fs/promises'
 
 export function startChronJobs(){
     // Every day at 12:01am New York time
@@ -21,12 +20,5 @@ export function startChronJobs(){
         console.log(getFormattedDate(), 'Server healthy')
 
         ensureCurrentDatePuzzleInStore(true)
-        // const archive = JSON.parse(
-        //   await fs.readFile(
-        //     new URL('./puzzleArchive.json', import.meta.url),
-        //     'utf8'
-        //   )
-        // );
-        // console.log(archive)
     })
 }

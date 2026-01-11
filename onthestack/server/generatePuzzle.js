@@ -111,7 +111,7 @@ export async function ensureCurrentDatePuzzleInStore(skipDateValidation = false)
 async function savePuzzle(length, words) {
   const data = JSON.stringify({ length, words }, null, 4)
   try {
-    await fs.writeFile('./server/dailypuzzle.json', data, 'utf8')
+    await fs.writeFile('./server/dailyPuzzle.json', data, 'utf8')
     console.log('Puzzle saved successfully!')
     console.log(data)
   } catch (err) {
