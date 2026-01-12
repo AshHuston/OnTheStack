@@ -18,7 +18,5 @@ export function startChronJobs(){
     // Every hour
     cron.schedule('0 * * * *', async () => {
         console.log(getFormattedDate(), 'Server healthy')
-
-        ensureCurrentDatePuzzleInStore(true)
     })
 }
