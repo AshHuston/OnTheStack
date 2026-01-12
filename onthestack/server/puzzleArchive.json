@@ -1,5 +1,5 @@
 {
-    "length": 3,
+    "length": 4,
     "puzzles": [
         {
             "length": null,
@@ -207,6 +207,75 @@
                 }
             ],
             "date": "Sunday, January 11, 2026"
+        },
+        {
+            "length": null,
+            "words": [
+                {
+                    "isFirstWord": true,
+                    "isLastWord": false,
+                    "topConnector": "",
+                    "cardname": "harbinger of the seas",
+                    "bottomConnector": "seas",
+                    "blankMap": "_________ __ ___ ____",
+                    "isSolved": true
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "seas",
+                    "cardname": "season of weaving",
+                    "bottomConnector": "ing",
+                    "blankMap": "______ __ _______",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "ing",
+                    "cardname": "ingenious prodigy",
+                    "bottomConnector": "prodigy",
+                    "blankMap": "_________ _______",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "prodigy",
+                    "cardname": "prodigy's prototype",
+                    "bottomConnector": "prototype",
+                    "blankMap": "_______'_ _________",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "prototype",
+                    "cardname": "prototype portal",
+                    "bottomConnector": "portal",
+                    "blankMap": "_________ ______",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "portal",
+                    "cardname": "portal mage",
+                    "bottomConnector": "age",
+                    "blankMap": "______ ____",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": true,
+                    "topConnector": "age",
+                    "cardname": "agent of treachery",
+                    "bottomConnector": "",
+                    "blankMap": "_____ __ _________",
+                    "isSolved": false
+                }
+            ],
+            "date": "Monday, January 12, 2026"
         }
     ]
 }

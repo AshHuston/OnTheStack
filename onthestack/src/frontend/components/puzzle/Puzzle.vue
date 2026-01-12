@@ -156,14 +156,15 @@ onUnmounted(() => {
         </div>
         <div v-else class="wa-stack card-name-stack mobile">
             <div class="card-stack">
-                <!-- <CardImage
+                <CardImage
                     v-for="(cardData, index, key) in puzzleStore.puzzle.words.filter((_, index) => solvedStates[index])"
                     :key
                     :card-name="cardData.cardname"
                     is-solved="true"
                     class="stacked-card"
-                /> -->
-                <CardImage :card-name="metaStore.lastSolvedCard.cardname" is-solved="true" />
+                    
+                    :index
+                />
             </div>
             <CardName
                 v-for="(cardData, index, key) in puzzleStore.puzzle.words"
@@ -171,7 +172,6 @@ onUnmounted(() => {
                 :index
                 :cardData
                 :isSolved="solvedStates[index]"
-                
                 :style="{'--contentScale': contentScale }"
             />
         </div>
@@ -197,12 +197,10 @@ onUnmounted(() => {
 
 .card-stack {
     position: relative;
-    width: 200px;   /* card width */
+    height: 10rem;
 }
 .stacked-card {
     position: absolute;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .card-name-card {

@@ -7,7 +7,8 @@ import { useMetaStore } from '@/stores/meta';
 const props = defineProps({
   cardName: String,
   isSolved: Boolean,
-  index: Number
+  index: Number,
+  listLength: Number
 })
 
 async function setCardImageUrl(cardname) {
@@ -104,64 +105,69 @@ function onImageError(){
 </script>
 
 <template>
-    <div v-if="isSolved">
-        <div v-if="loading">Loading image…</div>
-        <div v-else-if="error">Failed to load image</div>
-        <img
-            v-else
-            :src="imageUrl" 
-            alt="Result image"
-            class="card-image"
-            :class="{ mobile: metaStore.isOnMobile}"
-            @mouseenter="isHovering = true"
-            @mouseleave="isHovering = false"
-            @mousemove="onMouseMove"
-            @error="onImageError"
-        />
-        
-    </div>
-    <div v-else>
-        <img  
-            :src="cardBackUrl" 
-            alt="Result image"
-            class="card-image"
-            @error="onImageError"
-        />
-    </div>
-    <div
-        v-show="isHovering" 
-        class="hover-container"
-        ref="hoveredImg"
-        :style="{
-            left: mouseX + 'px',
-            top: mouseY + 'px'
-    }">
-        <img  
-            :src="imageUrl" 
-            alt="Result image"
-            class="hover-blowup"
-            @error="onImageError"
-        />
-        <img  
-            v-if="twoSided"
-            :src="imageUrlBack" 
-            alt="Result image"
-            class="hover-blowup"
-            @error="onImageError"
-        />
+    <div>
+        <!-- IMPROVE: make this scale with listLength  -->
+        <div 
+            v-if="isSolved" 
+            :class="{ 'card-root' :metaStore.isOnMobile}"
+            :style="{ '--offset': `${props.index*38}px` }"
+        >
+            <div v-if="loading">Loading image…</div>
+            <div v-else-if="error">Failed to load image</div>
+            <img
+                v-else
+                :src="imageUrl" 
+                alt="Result image"
+                class="card-image"
+                @mouseenter="isHovering = true"
+                @mouseleave="isHovering = false"
+                @mousemove="onMouseMove"
+                @error="onImageError"
+            />
+            
+        </div>
+        <div v-else>
+            <img  
+                :src="cardBackUrl" 
+                alt="Result image"
+                class="card-image"
+                @error="onImageError"
+            />
+        </div>
+        <div
+            v-show="isHovering" 
+            class="hover-container"
+            ref="hoveredImg"
+            :style="{
+                left: mouseX + 'px',
+                top: mouseY + 'px'
+        }">
+            <img  
+                :src="imageUrl" 
+                alt="Result image"
+                class="hover-blowup"
+                @error="onImageError"
+            />
+            <img  
+                v-if="twoSided"
+                :src="imageUrlBack" 
+                alt="Result image"
+                class="hover-blowup"
+                @error="onImageError"
+            />
+        </div>
     </div>
 </template>
 
-<style>
+<style scoped>
+.card-root {
+    transform: translateX(var(--offset));
+}
+
 .card-image {
-    width: 7rem;
-    height: auto;
+    height: 10rem;
 }
-.card-image.mobile{
-    /* position: absolute;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2); */
-}
+
 .hover-container {
     position: fixed;
     pointer-events: none;
