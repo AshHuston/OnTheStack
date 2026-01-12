@@ -112,10 +112,8 @@ function onImageError(){
             :class="{ 'card-root' :metaStore.isOnMobile}"
             :style="{ '--offset': `${props.index*38}px` }"
         >
-            <div v-if="loading">Loading image…</div>
-            <div v-else-if="error">Failed to load image</div>
             <img
-                v-else
+                v-show="isSolved"
                 :src="imageUrl" 
                 alt="Result image"
                 class="card-image"
