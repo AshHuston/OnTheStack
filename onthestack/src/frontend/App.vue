@@ -6,10 +6,12 @@ import '@awesome.me/webawesome/dist/components/dialog/dialog.js';
 import '@awesome.me/webawesome/dist/components/callout/callout.js';
 import '@awesome.me/webawesome/dist/components/icon/icon.js';
 import { usePuzzleStore } from '@/stores/puzzle';
+import SettingsDialog from './components/settingsDialog.vue';
 
 const showInfo = ref(false)
 const metaStore = useMetaStore()
 const puzzleStore = usePuzzleStore()
+const showSettings = ref(false)
 
 const now = ref(new Date());
 const tonight = new Date();
@@ -72,16 +74,30 @@ const wipText = "On The Stack is a work-in-progress. Thank you for being patient
       :class="{ mobile: metaStore.isOnMobile }"
       >
 
-    <wa-icon 
-      name="circle-info" 
-      label="Info"
-      variant="brand" 
-      class="info-button"
-      :class="{ mobile: metaStore.isOnMobile }"
-      @click="onClick"
-    ></wa-icon>
+    <div class="wa-gap-0" :class="{'wa-stack': !metaStore.isOnMobile, 'wa-cluster': metaStore.isOnMobile}">
+      <wa-icon 
+        name="circle-info" 
+        label="Info"
+        variant="brand" 
+        class="info-button"
+        :class="{ mobile: metaStore.isOnMobile }"
+        @click="onClick"
+      ></wa-icon>
+
+      <wa-icon 
+        name="gear" 
+        label="Info"
+        variant="brand" 
+        class="info-button"
+        :class="{ mobile: metaStore.isOnMobile }"
+        @click="showSettings = !showSettings"
+      ></wa-icon>
+    </div>
 
   </div>
+
+  <SettingsDialog :open="showSettings" />
+
   <wa-dialog 
     :open="showInfo" 
     label="How to play:"
@@ -124,12 +140,12 @@ html.mobile {
 .info-button {
   font-size: 1.2rem;
   color: var(--wa-color-brand-on-normal);
-  margin: 0.6rem 0;
+  margin: 0.25rem 0;
   cursor: pointer;
 }
 .info-button.mobile {
   font-size: 1.75rem;
-  margin-top: 1.5rem;
+  /* margin-top: 1.5rem; */
 }
 
 .logo {

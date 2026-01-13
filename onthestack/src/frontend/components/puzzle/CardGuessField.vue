@@ -1,13 +1,8 @@
 <!-- eslint-disable vue/no-mutating-props -->
 <script setup>
 import { ref } from 'vue'
-import { useSettingsStore } from '@/stores/settings';
 import '@awesome.me/webawesome/dist/components/input/input.js';
 import '@awesome.me/webawesome/dist/components/checkbox/checkbox.js';
-import { useMetaStore } from '@/stores/meta';
-
-const settingsStore = useSettingsStore()
-const metaStore = useMetaStore()
 
 const props = defineProps({
   guess: String,
@@ -35,39 +30,10 @@ async function onClickResult(text) {
     await updateList()
 }
 
-const onChangeAutocomplete = (event) => {
-  settingsStore.autoComplete = event.target.checked
-}
-const onChangeHighlight = (event) => {
-  settingsStore.highlight = event.target.checked
-}
-const onChangeShowFirstLetter = (event) => {
-  settingsStore.showFirstLetter = event.target.checked
-}
-
 </script>
 
 <template>
     <div class="container wa-stack">
-        <div class="wa-cluster">
-            <wa-checkbox 
-                size="small" 
-                :checked="settingsStore.autoComplete" 
-                @change="onChangeAutocomplete"
-            >Autocomplete</wa-checkbox>
-            <wa-checkbox 
-                size="small"
-                :defaultChecked="settingsStore.highlight" 
-                :checked="settingsStore.highlight" 
-                @change="onChangeHighlight"
-            >Highlight</wa-checkbox>
-            <wa-checkbox 
-                size="small"
-                :defaultChecked="settingsStore.showFirstLetter" 
-                :checked="settingsStore.showFirstLetter" 
-                @change="onChangeShowFirstLetter"
-            >First Letter</wa-checkbox>
-        </div>
         <wa-input
             :value="props.guess"
             @input="e => onInput(e.target.value)"
