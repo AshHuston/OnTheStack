@@ -131,7 +131,7 @@ onUnmounted(() => {
 
 <template>
     <div class="wa-stack wa-gap-m wa-align-items-center">
-        <div class="inputStuff wa-stack wa-align-items-center" :class="{ mobile: metaStore.isOnMobile}">
+        <div class="inputStuff wa-align-items-center" :class="{ mobile: metaStore.isOnMobile, 'wa-stack': metaStore.isOnMobile, 'wa-cluster': !metaStore.isOnMobile, }">
             <div v-if="metaStore.isOnMobile" class="wa-cluster wa-gap-xs mobile hintButton">
                 <button v-if="settingsStore.showGeneratePuzzleButton === true" @click="newPuzzle(7)">Generate Puzzle</button>
                 <button @click="giveHnt()">Hint</button>
