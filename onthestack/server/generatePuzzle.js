@@ -1,6 +1,6 @@
 import { Puzzle } from './puzzle.js'
 import { getFormattedDate, getFormattedTimeStamp, shuffledClone } from './helpers.js';
-import edhRecTop10k from './cardPools/edhrecTop10k.json' with {type: 'json'}
+import edhRecTop5k from './cardPools/edhrecTop5k.json' with {type: 'json'}
 import fs from 'fs/promises'
 
 
@@ -84,7 +84,7 @@ function ensureFrontFaceCardName(card) {
  */
 export async function ensureCurrentDatePuzzleInStore(skipDateValidation = false){
     const numOfCards = 7
-    const cardPool = edhRecTop10k
+    const cardPool = edhRecTop5k
 
     const currentDate = getFormattedDate()
     const puzzleArchive = JSON.parse(

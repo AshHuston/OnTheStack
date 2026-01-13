@@ -1,5 +1,5 @@
 {
-    "length": 4,
+    "length": 5,
     "puzzles": [
         {
             "length": null,
@@ -276,6 +276,75 @@
                 }
             ],
             "date": "Monday, January 12, 2026"
+        },
+        {
+            "length": null,
+            "words": [
+                {
+                    "isFirstWord": true,
+                    "isLastWord": false,
+                    "topConnector": "",
+                    "cardname": "eladamri, korvecdal",
+                    "bottomConnector": "dal",
+                    "blankMap": "________, _________",
+                    "isSolved": true
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "dal",
+                    "cardname": "dalkovan encampment",
+                    "bottomConnector": "ment",
+                    "blankMap": "________ __________",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "ment",
+                    "cardname": "mentor of the meek",
+                    "bottomConnector": "meek",
+                    "blankMap": "______ __ ___ ____",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "meek",
+                    "cardname": "meekstone",
+                    "bottomConnector": "one",
+                    "blankMap": "_________",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "one",
+                    "cardname": "one ring to rule them all",
+                    "bottomConnector": "all",
+                    "blankMap": "___ ____ __ ____ ____ ___",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "all",
+                    "cardname": "allosaurus shepherd",
+                    "bottomConnector": "herd",
+                    "blankMap": "__________ ________",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": true,
+                    "topConnector": "herd",
+                    "cardname": "herd baloth",
+                    "bottomConnector": "",
+                    "blankMap": "____ ______",
+                    "isSolved": false
+                }
+            ],
+            "date": "Tuesday, January 13, 2026"
         }
     ]
 }

@@ -131,7 +131,7 @@ onUnmounted(() => {
 
 <template>
     <div class="wa-stack wa-gap-m wa-align-items-center">
-        <div class="inputStuff wa-align-items-center" :class="{ mobile: metaStore.isOnMobile, 'wa-stack': metaStore.isOnMobile, 'wa-cluster': !metaStore.isOnMobile, }">
+        <div class="wa-align-items-center" :class="{ 'wa-stack': metaStore.isOnMobile, 'wa-cluster': !metaStore.isOnMobile }">
             <div v-if="metaStore.isOnMobile" class="wa-cluster wa-gap-xs mobile hintButton">
                 <button v-if="settingsStore.showGeneratePuzzleButton === true" @click="newPuzzle(7)">Generate Puzzle</button>
                 <button @click="giveHnt()">Hint</button>
@@ -162,7 +162,6 @@ onUnmounted(() => {
                     :card-name="cardData.cardname"
                     is-solved="true"
                     class="stacked-card"
-                    
                     :index
                 />
             </div>
@@ -177,10 +176,11 @@ onUnmounted(() => {
         </div>
     </div>
 
+    <!-- IMPROVE: Add score/time or some other kind of metric worth sharing. And add a share button too. -->
     <wa-dialog :open="puzzleStore.isSolved && doneLoading" label="Congratulations">
         You won!!! Come back in {{ metaStore.countdownToNextPuzzle }} for a new puzzle!
         <template v-slot:footer>
-            <wa-button  variant="brand" data-dialog="close">Close</wa-button>
+            <wa-button size="small" variant="brand" data-dialog="close">Close</wa-button>
         </template>
     </wa-dialog>
 
@@ -210,18 +210,6 @@ onUnmounted(() => {
     padding-bottom: 25rem;
 }
 
-.inputStuff {
-    margin-top: -4rem;
-    /* margin-left: auto; */
-}
-.inputStuff.mobile {
-    margin-top: 0;
-    
-}
-
-.hintButton {
-
-}
 .hintButton.mobile {
     margin-top: -3rem;
     margin-left: auto;

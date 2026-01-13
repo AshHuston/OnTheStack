@@ -7,6 +7,9 @@ import '@awesome.me/webawesome/dist/components/callout/callout.js';
 import '@awesome.me/webawesome/dist/components/icon/icon.js';
 import { usePuzzleStore } from '@/stores/puzzle';
 import SettingsDialog from './components/settingsDialog.vue';
+import Markdown from './components/markdown.vue';
+import { getFormattedDate } from '@/helpers';
+import PuzzleDate from './components/puzzle/PuzzleDate.vue';
 
 const showInfo = ref(false)
 const metaStore = useMetaStore()
@@ -62,8 +65,8 @@ const onClose = () => {
   showInfo.value = false
 }
 
-const infoText = "Welcome to OnTheStack! A daily puzzle is comprised of 7 cards from the EDHrec top 10,000 cards. Their names chain together so the end of one card is a hint for the beginning of the next one.\n\nThe checkboxes are settings that may make your game a bit easier.\n\n\nGood luck!\n-The Dev"
-const wipText = "On The Stack is a work-in-progress. Thank you for being patient as I improve it!   -The Dev"
+const infoText = `${metaStore.isOnMobile? (getFormattedDate()+'\n\n') : ''}Welcome to OnTheStack! A daily puzzle game that tests your knowledge of Magic: the Gathering cards.\n\nA puzzle is comprised of 7 cards from the given card pool(currently the top 10k edhrec cards). Their names chain together so the end of one card is a hint for the beginning of the next one.\n\nCheck out the settings to find the gamemode that best suits you.\n\n\nGood luck!\n\n-The Dev`
+const wipText = "On The Stack is still a work-in-progress. If you know how to reach me, feedback is very welcome!\n\nThank you for being patient as I improve it!\n\n-The Dev"
 </script>
 
 <template :class="{ mobile: metaStore.isOnMobile }">
@@ -102,29 +105,26 @@ const wipText = "On The Stack is a work-in-progress. Thank you for being patient
     :open="showInfo" 
     label="How to play:"
     @wa-after-hide="onClose"
+    light-dismiss
   >
-    {{ infoText }}
+    <Markdown :content="infoText"/>
     <template v-slot:footer>
         <wa-button  variant="brand" data-dialog="close">Close</wa-button>
     </template>
   </wa-dialog>
 
-  <!-- IMPROVE: Make this a callout or something less intrusive -->
     <wa-dialog 
       open="true" 
       label="Work in Progress"
+      light-dismiss
     >
-    {{ wipText }}
+    <Markdown :content="wipText" />
     <template v-slot:footer>
         <wa-button  variant="brand" data-dialog="close">Close</wa-button>
     </template>
   </wa-dialog>
 
-  <!-- <wa-callout>
-      <wa-icon slot="icon" name="beer-mug-empty" variant="plain"></wa-icon>
-    {{ wipText }}
-  </wa-callout> -->
-
+  <PuzzleDate v-if="!metaStore.isOnMobile" class="dateline"/>
   <Puzzle/>
 </template>
 
@@ -155,5 +155,13 @@ html.mobile {
 .logo.mobile {
   width: 3rem; 
   margin: .5rem;
+}
+
+.dateline {
+  text-align: center;
+  margin: -3rem 0 1rem 0;
+}
+.logo.mobile {
+  
 }
 </style>

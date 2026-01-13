@@ -144,6 +144,7 @@ function onImageError(){
                 :src="imageUrl" 
                 alt="Result image"
                 class="hover-blowup"
+                :class="{ mobile: metaStore.isOnMobile }"
                 @error="onImageError"
             />
             <img  
@@ -173,5 +174,8 @@ function onImageError(){
 }
 .hover-blowup {
     height: 18rem;
+}
+.hover-blowup.mobile {
+    height: 22rem;
 }
 </style>
