@@ -170,7 +170,10 @@ watch(currentlySolvingIndex, (newIndex) => {
 
 <template>
     <div class="wa-stack wa-gap-m wa-align-items-center">
-        <div class="wa-align-items-center" :class="{ 'wa-stack': metaStore.isOnMobile, 'wa-cluster': !metaStore.isOnMobile }">
+        <div
+          class="wa-align-items-center"
+          :class="{ 'wa-stack': metaStore.isOnMobile, 'wa-cluster': !metaStore.isOnMobile, }"
+        >
             <div v-if="metaStore.isOnMobile" class="wa-cluster wa-gap-xs mobile hintButton">
                 <button v-if="settingsStore.showGeneratePuzzleButton === true" @click="newPuzzle(7)">Generate Puzzle</button>
                 <button @click="giveHnt()">Hint</button>
@@ -260,6 +263,7 @@ watch(currentlySolvingIndex, (newIndex) => {
 .mobileNameStack {
     height: calc(90px*var(--totalCards));
     overflow-y: auto;
+    margin-top: -1.5rem;
 
     -webkit-mask-image: linear-gradient(
       to bottom,
