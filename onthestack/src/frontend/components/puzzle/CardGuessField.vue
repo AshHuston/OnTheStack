@@ -26,7 +26,7 @@ async function onInput(text) {
 }
 
 async function onClickResult(text) {
-    emit('update:guess', props.guess = text); 
+    emit('update:guess', props.guess = text);
     await updateList()
 }
 
@@ -42,12 +42,12 @@ async function onClickResult(text) {
             type="text"
             placeholder="Type here..."
         />
-        
-        <!-- IMPROVE: This is not working right... I want to make it wait if thers already a call. TBD how to do that.  -->
+
+        <!-- IMPROVE: This is not working right... I want to make it wait if theres already a call. TBD how to do that.  -->
         <ul v-if="showCardSuggestions && isFocused" class="list">
-            <li 
-                v-for="o in potentialCardNames" 
-                :key="o" 
+            <li
+                v-for="o in potentialCardNames"
+                :key="o"
                 @mousedown="onClickResult(o)"
                 class="list-item"
             >

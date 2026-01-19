@@ -40,8 +40,9 @@ puzzleStore.initialize({
 const solvedStates = computed(() => {
     return puzzleStore.puzzle.words.map((word, i, arr) => {
         const guessIsRight = () => { return sanitizeString(guess.value) === sanitizeString(puzzleStore.puzzle.words[i].cardname) }
+        const fullyHinted = () => { return puzzleStore.puzzle.words[i].cardname === puzzleStore.puzzle.words[i].blankMap }
         const prevSolved = i === 0 ? true : arr[i - 1].isSolved
-        if (prevSolved && guessIsRight() ) { word.isSolved = true }
+        if (prevSolved && (guessIsRight() || fullyHinted()) ) { word.isSolved = true }
         return word.isSolved
     })
 })
@@ -59,9 +60,9 @@ function updatePuzzle() {
     const lastSolvedWord = puzzleStore.puzzle.words[solvedStates.value.lastIndexOf(true)]
     metaStore.lastSolvedCard = lastSolvedWord
     const nextCard = puzzleStore.puzzle.words[solvedStates.value.lastIndexOf(true)+1]
-    if ( !lastSolvedWord.isLastWord ) {
+    if ( !lastSolvedWord.isLastWord && settingsStore.highlight ) {
         puzzleStore.updateBlankMap(solvedStates.value.lastIndexOf(true)+1)
-        guess.value = nextCard.blankMap.slice(0, (nextCard.blankMap.indexOf('_') === -1 ? nextCard.blankMap.length : nextCard.blankMap.indexOf('_')))
+         guess.value = nextCard.blankMap.slice(0, (nextCard.blankMap.indexOf('_') === -1 ? nextCard.blankMap.length : nextCard.blankMap.indexOf('_')))
     }
 }
 
@@ -77,7 +78,7 @@ watch(settingsStore, () => {
             element.blankMap = element.cardname[0] + element.blankMap.slice(1)
         }
         else if (!element.isSolved){
-            element.blankMap = '_' + element.blankMap.slice(1)
+            element.blankMap = element.blankMap.replace(/[a-z0-9]/gi, '_')
         }
     });
   updatePuzzle()
