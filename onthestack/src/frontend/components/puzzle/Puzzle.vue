@@ -20,6 +20,10 @@ const puzzleStore = usePuzzleStore()
 const settingsStore = useSettingsStore()
 const metaStore = useMetaStore()
 
+const mobileNameStack = ref(null)
+const currentlyGuessingCard = ref(null)
+const nameCardRefs = ref([])
+
 puzzleStore.initialize({
   length: null,
   words: [{
@@ -46,12 +50,16 @@ puzzleStore.isSolved = computed(() => {
     return !solvedStates.value.includes(false)
 })
 
+const currentlySolvingIndex = computed(() => {
+    return solvedStates.value.findIndex(n => n == false)
+})
+
 function updatePuzzle() {
     if(puzzleStore.puzzle === null || puzzleStore.puzzle.value === null){ return }
     const lastSolvedWord = puzzleStore.puzzle.words[solvedStates.value.lastIndexOf(true)]
     metaStore.lastSolvedCard = lastSolvedWord
     const nextCard = puzzleStore.puzzle.words[solvedStates.value.lastIndexOf(true)+1]
-    if ( !lastSolvedWord.isLastWord ) { 
+    if ( !lastSolvedWord.isLastWord ) {
         puzzleStore.updateBlankMap(solvedStates.value.lastIndexOf(true)+1)
         guess.value = nextCard.blankMap.slice(0, (nextCard.blankMap.indexOf('_') === -1 ? nextCard.blankMap.length : nextCard.blankMap.indexOf('_')))
     }
@@ -126,6 +134,37 @@ onMounted(async () => {
 onUnmounted(() => {
   window.removeEventListener('keydown', onKeyDown)
 })
+
+function setActiveRef(el, index) {
+  nameCardRefs.value[index] = el
+  if (index === currentlySolvingIndex.value) {
+    currentlyGuessingCard.value = el
+  }
+}
+
+function scrollToIndex(n) {
+  try{
+    const container = document.querySelector('.mobileNameStack')
+    const targetEl = container.children[0].children[n]
+    console.log(container)
+    if (targetEl) {
+      const top =
+        targetEl.getBoundingClientRect().top -
+        container.getBoundingClientRect().top +
+        container.scrollTop -
+        (1.1*parseFloat(getComputedStyle(document.documentElement).fontSize))
+      container.scrollTo({ top: top, behavior: 'smooth' })
+      console.log(top)
+    }
+
+  }catch(error){console.log('Scroll failed', error)}
+}
+
+
+watch(currentlySolvingIndex, (newIndex) => {
+  currentlyGuessingCard.value = nameCardRefs.value[newIndex] || null
+  if (newIndex > 0) scrollToIndex(newIndex)
+})
 </script>
 
 
@@ -144,15 +183,15 @@ onUnmounted(() => {
         </div>
 
         <div v-if="!metaStore.isOnMobile" class="wa-stack card-name-stack">
-            <CardName
-                v-for="(cardData, index, key) in puzzleStore.puzzle.words"
-                v-bind:key
-                :index
-                :cardData
-                :isSolved="solvedStates[index]"
-                :class="{ 'card-name-card': index>0}"
-                :style="{'--contentScale': contentScale }"
-            />
+            <div v-for="(cardData, index, key) in puzzleStore.puzzle.words" v-bind:key>
+              <CardName
+                  :index
+                  :cardData
+                  :isSolved="solvedStates[index]"
+                  :class="{ 'card-name-card': index>0}"
+                  :style="{'--contentScale': contentScale }"
+              />
+          </div>
         </div>
         <div v-else class="wa-stack card-name-stack mobile">
             <div class="card-stack">
@@ -165,14 +204,25 @@ onUnmounted(() => {
                     :index
                 />
             </div>
-            <CardName
-                v-for="(cardData, index, key) in puzzleStore.puzzle.words"
-                v-bind:key
-                :index
-                :cardData
-                :isSolved="solvedStates[index]"
-                :style="{'--contentScale': contentScale }"
-            />
+            <div
+              class="mobileNameStack"
+              ref="mobileNameStack"
+              :style="{'--totalCards': puzzleStore.puzzle.words.length}"
+              >
+              <div class="wa-stack wa-gap-l" style="height:2000px;">
+              <br/>
+              <CardName
+                  v-for="(cardData, index, key) in puzzleStore.puzzle.words"
+                  v-bind:key
+                  :index
+                  :cardData
+                  :isSolved="solvedStates[index]"
+                  :style="{'--contentScale': contentScale }"
+                  :ref="el => setActiveRef(el, index)"
+              />
+          </div>
+          hi
+          </div>
         </div>
     </div>
 
@@ -206,6 +256,28 @@ onUnmounted(() => {
 .card-name-card {
     margin-top: calc(-50px * var(--contentScale));
 }
+
+.mobileNameStack {
+    height: calc(90px*var(--totalCards));
+    overflow-y: auto;
+
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 24px,
+      black calc(100% - 24px),
+      transparent
+    );
+
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 24px,
+      black calc(100% - 24px),
+      transparent
+    );
+}
+.mobileNameStack::-webkit-scrollbar { display: none; }
 .page-padding{
     padding-bottom: 25rem;
 }

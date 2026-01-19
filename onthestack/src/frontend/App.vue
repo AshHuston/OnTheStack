@@ -65,32 +65,32 @@ const onClose = () => {
   showInfo.value = false
 }
 
-const infoText = `${metaStore.isOnMobile? (getFormattedDate()+'\n\n') : ''}Welcome to OnTheStack! A daily puzzle game that tests your knowledge of Magic: the Gathering cards.\n\nA puzzle is comprised of 7 cards from the given card pool(currently the top 10k edhrec cards). Their names chain together so the end of one card is a hint for the beginning of the next one.\n\nCheck out the settings to find the gamemode that best suits you.\n\n\nGood luck!\n\n-The Dev`
+const infoText = `${metaStore.isOnMobile? (getFormattedDate()+'\n\n') : ''}Welcome to OnTheStack! A daily puzzle game that tests your knowledge of Magic: the Gathering cards.\n\nA puzzle is comprised of 7 cards from the given card pool(currently the top 10k edhrec cards). Their names chain together so the end of one card is a hint for the beginning of the next one.\n\nCheck out the settings to find the game mode that best suits you.\n\n\nGood luck!\n\n-The Dev`
 const wipText = "On The Stack is still a work-in-progress. If you know how to reach me, feedback is very welcome!\n\nThank you for being patient as I improve it!\n\n-The Dev"
 </script>
 
 <template :class="{ mobile: metaStore.isOnMobile }">
   <div class="wa-cluster wa-align-items-start wa-gap-0">
-    <img 
+    <img
       src="../OnTheStack.png"
       class="logo"
       :class="{ mobile: metaStore.isOnMobile }"
       >
 
     <div class="wa-gap-0" :class="{'wa-stack': !metaStore.isOnMobile, 'wa-cluster': metaStore.isOnMobile}">
-      <wa-icon 
-        name="circle-info" 
+      <wa-icon
+        name="circle-info"
         label="Info"
-        variant="brand" 
+        variant="brand"
         class="info-button"
         :class="{ mobile: metaStore.isOnMobile }"
         @click="onClick"
       ></wa-icon>
 
-      <wa-icon 
-        name="gear" 
+      <wa-icon
+        name="gear"
         label="Info"
-        variant="brand" 
+        variant="brand"
         class="info-button"
         :class="{ mobile: metaStore.isOnMobile }"
         @click="showSettings = !showSettings"
@@ -101,8 +101,8 @@ const wipText = "On The Stack is still a work-in-progress. If you know how to re
 
   <SettingsDialog :open="showSettings" />
 
-  <wa-dialog 
-    :open="showInfo" 
+  <wa-dialog
+    :open="showInfo"
     label="How to play:"
     @wa-after-hide="onClose"
     light-dismiss
@@ -113,8 +113,8 @@ const wipText = "On The Stack is still a work-in-progress. If you know how to re
     </template>
   </wa-dialog>
 
-    <wa-dialog 
-      open="true" 
+    <wa-dialog
+      open="true"
       label="Work in Progress"
       light-dismiss
     >
@@ -126,9 +126,11 @@ const wipText = "On The Stack is still a work-in-progress. If you know how to re
 
   <PuzzleDate v-if="!metaStore.isOnMobile" class="dateline"/>
   <Puzzle/>
+
 </template>
 
 <style>
+
 html, body {
   font-size: 14pt;
 }
@@ -149,11 +151,11 @@ html.mobile {
 }
 
 .logo {
-  width: 5rem; 
+  width: 5rem;
   margin: .5rem;
 }
 .logo.mobile {
-  width: 3rem; 
+  width: 3rem;
   margin: .5rem;
 }
 
@@ -162,6 +164,6 @@ html.mobile {
   margin: -3rem 0 1rem 0;
 }
 .logo.mobile {
-  
+
 }
 </style>

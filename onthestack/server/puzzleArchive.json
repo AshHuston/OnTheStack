@@ -1,5 +1,5 @@
 {
-    "length": 5,
+    "length": 6,
     "puzzles": [
         {
             "length": null,
@@ -345,6 +345,75 @@
                 }
             ],
             "date": "Tuesday, January 13, 2026"
+        },
+        {
+            "length": null,
+            "words": [
+                {
+                    "isFirstWord": true,
+                    "isLastWord": false,
+                    "topConnector": "",
+                    "cardname": "folk hero",
+                    "bottomConnector": "hero",
+                    "blankMap": "____ ____",
+                    "isSolved": true
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "hero",
+                    "cardname": "hero's heirloom",
+                    "bottomConnector": "heirloom",
+                    "blankMap": "____'_ ________",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "heirloom",
+                    "cardname": "heirloom blade",
+                    "bottomConnector": "blade",
+                    "blankMap": "________ _____",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "blade",
+                    "cardname": "blade of selves",
+                    "bottomConnector": "elves",
+                    "blankMap": "_____ __ ______",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "elves",
+                    "cardname": "elves of deep shadow",
+                    "bottomConnector": "shadow",
+                    "blankMap": "_____ __ ____ ______",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "shadow",
+                    "cardname": "shadowspear",
+                    "bottomConnector": "pear",
+                    "blankMap": "___________",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": true,
+                    "topConnector": "pear",
+                    "cardname": "pearl medallion",
+                    "bottomConnector": "",
+                    "blankMap": "_____ _________",
+                    "isSolved": false
+                }
+            ],
+            "date": "Monday, January 19, 2026"
         }
     ]
 }
