@@ -176,7 +176,7 @@ watch(currentlySolvingIndex, (newIndex) => {
         >
             <div v-if="metaStore.isOnMobile" class="wa-cluster wa-gap-xs mobile hintButton">
                 <button v-if="settingsStore.showGeneratePuzzleButton === true" @click="newPuzzle(7)">Generate Puzzle</button>
-                <button type="button" @click.prevent="giveHnt()">Hint</button>
+                <button type="button" @touchstart.prevent="giveHnt()">Hint</button>
             </div>
             <cardGuessField v-model:guess="guess" :showCardSuggestions="settingsStore.autoComplete" />
             <div v-if="!metaStore.isOnMobile" class="wa-cluster">
@@ -284,6 +284,11 @@ watch(currentlySolvingIndex, (newIndex) => {
 .mobileNameStack::-webkit-scrollbar { display: none; }
 .page-padding{
     padding-bottom: 25rem;
+}
+
+.hintButton {
+  user-select: none;
+  touch-action: manipulation;
 }
 
 .hintButton.mobile {
