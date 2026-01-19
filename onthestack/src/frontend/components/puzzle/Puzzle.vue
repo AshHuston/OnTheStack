@@ -176,7 +176,7 @@ watch(currentlySolvingIndex, (newIndex) => {
         >
             <div v-if="metaStore.isOnMobile" class="wa-cluster wa-gap-xs mobile hintButton">
                 <button v-if="settingsStore.showGeneratePuzzleButton === true" @click="newPuzzle(7)">Generate Puzzle</button>
-                <button @click.prevent="giveHnt()">Hint</button>
+                <button type="button" @click.prevent="giveHnt()">Hint</button>
             </div>
             <cardGuessField v-model:guess="guess" :showCardSuggestions="settingsStore.autoComplete" />
             <div v-if="!metaStore.isOnMobile" class="wa-cluster">
