@@ -5,6 +5,11 @@ import '@awesome.me/webawesome/dist/components/input/input.js';
 import '@awesome.me/webawesome/dist/components/checkbox/checkbox.js';
 import { usePuzzleStore } from '@/stores/puzzle';
 import { useSettingsStore } from '@/stores/settings';
+import { sanitizeString } from '../../../helpers.js'
+
+const props = defineProps({
+  cardname: String,
+})
 
 const potentialCardNames = ref([])
 const isFocused = ref(false)
@@ -23,6 +28,8 @@ async function updateList() {
     potentialCardNames.value = data.data
 }
 
+const guessIsRight = () => { return sanitizeString(puzzleStore.guess) === sanitizeString(props.cardname) }
+
 async function runWrongAnswerFeedback() {
   isWrong.value = false        // reset so animation can re-trigger
   await nextTick()
@@ -38,13 +45,12 @@ async function runWrongAnswerFeedback() {
 
 async function onInput(text) {
     puzzleStore.guess = text
-    if ( await guessIsRealCard() ) { runWrongAnswerFeedback() }
+    if ( !guessIsRight() && await guessIsRealCard() ) { runWrongAnswerFeedback() }
     await updateList()
 }
 
 async function onClickResult(text) {
-    puzzleStore.guess = text
-    await updateList()
+    await onInput(text)
 }
 
 const guessIsRealCard = async () => {

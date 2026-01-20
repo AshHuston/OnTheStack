@@ -36,19 +36,15 @@ puzzleStore.initialize({
     },],
 })
 
-// May have to move this somewhere else. Probably cardguessfield
-// const guessIsRealCard = async () => {
-//     const url = "https://api.scryfall.com/cards/named?fuzzy=" + puzzleStore.guess
-//     const response = await fetch(url);
-//     return response.ok
-// }
-
 const solvedStates = computed(() => {
     return puzzleStore.puzzle.words.map((word, i, arr) => {
         const guessIsRight = () => { return sanitizeString(puzzleStore.guess) === sanitizeString(puzzleStore.puzzle.words[i].cardname) }
         const fullyHinted = () => { return puzzleStore.puzzle.words[i].cardname === puzzleStore.puzzle.words[i].blankMap }
         const prevSolved = i === 0 ? true : arr[i - 1].isSolved
-        if (prevSolved && (guessIsRight() || fullyHinted()) ) { word.isSolved = true }
+        if (prevSolved && (guessIsRight() || fullyHinted()) ) {
+          word.isSolved = true;
+          puzzleStore.guess = ''
+        }
         return word.isSolved
     })
 })
@@ -98,7 +94,7 @@ async function newPuzzle() {
     updatePuzzle()
 }
 
-function giveHnt() {
+function giveHint() {
     puzzleStore.updateBlankMap(
         Math.min(solvedStates.value.lastIndexOf(true)+1, solvedStates.value.length-1),
         false,
@@ -183,12 +179,12 @@ watch(currentlySolvingIndex, (newIndex) => {
         >
             <div v-if="metaStore.isOnMobile" class="wa-cluster wa-gap-xs mobile hintButton">
                 <button v-if="settingsStore.showGeneratePuzzleButton === true" @click="newPuzzle(7)">Generate Puzzle</button>
-                <button type="button" @touchstart.prevent="giveHnt()">Hint</button>
+                <button type="button" @touchstart.prevent="giveHint()">Hint</button>
             </div>
-            <cardGuessField v-model:guess="puzzleStore.guess" :showCardSuggestions="settingsStore.autoComplete" />
+            <cardGuessField :cardname="puzzleStore.puzzle.words[currentlySolvingIndex]?.cardname" />
             <div v-if="!metaStore.isOnMobile" class="wa-cluster">
                 <button v-if="settingsStore.showGeneratePuzzleButton === true" @click="newPuzzle(7)">Generate Puzzle</button>
-                <button @click="giveHnt()">Hint</button>
+                <button @click="giveHint()">Hint</button>
             </div>
         </div>
 
