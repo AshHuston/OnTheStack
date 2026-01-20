@@ -62,7 +62,7 @@ function updatePuzzle() {
     const lastSolvedWord = puzzleStore.puzzle.words[solvedStates.value.lastIndexOf(true)]
     metaStore.lastSolvedCard = lastSolvedWord
     const nextCard = puzzleStore.puzzle.words[solvedStates.value.lastIndexOf(true)+1]
-    if ( !lastSolvedWord.isLastWord && settingsStore.highlight ) {
+    if ( !lastSolvedWord.isLastWord && settingsStore.showConnector ) {
         puzzleStore.updateBlankMap(solvedStates.value.lastIndexOf(true)+1)
          puzzleStore.guess = nextCard.blankMap.slice(0, (nextCard.blankMap.indexOf('_') === -1 ? nextCard.blankMap.length : nextCard.blankMap.indexOf('_')))
     }

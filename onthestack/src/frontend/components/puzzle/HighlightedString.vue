@@ -28,16 +28,16 @@ const parts = computed(() => {
 </script>
 
 <template>
-  
+
     <template v-for="(part, i) in parts" :key="i">
-      <span v-if="settingsStore.highlight" :class="part.part">
+      <span v-if="settingsStore.showConnector" :class="part.part">
         {{ part.text }}
       </span>
       <span v-else>
         {{ part.text }}
       </span>
     </template>
-  
+
 </template>
 
 <style scoped>

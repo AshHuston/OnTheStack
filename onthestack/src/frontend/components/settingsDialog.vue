@@ -12,8 +12,8 @@ const settingsStore = useSettingsStore()
 const onChangeAutocomplete = (event) => {
   settingsStore.autoComplete = event.target.checked
 }
-const onChangeHighlight = (event) => {
-  settingsStore.highlight = event.target.checked
+const onChangeShowConnector = (event) => {
+  settingsStore.showConnector = event.target.checked
 }
 const onChangeShowFirstLetter = (event) => {
   settingsStore.showFirstLetter = event.target.checked
@@ -22,25 +22,25 @@ const onChangeShowFirstLetter = (event) => {
 
 <template>
     <wa-dialog
-        :open="props.open" 
+        :open="props.open"
         label="Settings"
     >
         <div class="wa-cluster">
-            <wa-checkbox 
-                size="small" 
-                :checked="settingsStore.autoComplete" 
+            <wa-checkbox
+                size="small"
+                :checked="settingsStore.autoComplete"
                 @change="onChangeAutocomplete"
             >Autocomplete</wa-checkbox>
-            <wa-checkbox 
+            <wa-checkbox
                 size="small"
-                :defaultChecked="settingsStore.highlight" 
-                :checked="settingsStore.highlight" 
-                @change="onChangeHighlight"
-            >Highlight</wa-checkbox>
-            <wa-checkbox 
+                :defaultChecked="settingsStore.showConnector"
+                :checked="settingsStore.showConnector"
+                @change="onChangeShowConnector"
+            >Show Connectors</wa-checkbox>
+            <wa-checkbox
                 size="small"
-                :defaultChecked="settingsStore.showFirstLetter" 
-                :checked="settingsStore.showFirstLetter" 
+                :defaultChecked="settingsStore.showFirstLetter"
+                :checked="settingsStore.showFirstLetter"
                 @change="onChangeShowFirstLetter"
             >First Letter</wa-checkbox>
         </div>
