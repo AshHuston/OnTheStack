@@ -36,6 +36,13 @@ puzzleStore.initialize({
     },],
 })
 
+// May have to move this somewhere else. Probably cardguessfield
+// const guessIsRealCard = async () => {
+//     const url = "https://api.scryfall.com/cards/named?fuzzy=" + puzzleStore.guess
+//     const response = await fetch(url);
+//     return response.ok
+// }
+
 const solvedStates = computed(() => {
     return puzzleStore.puzzle.words.map((word, i, arr) => {
         const guessIsRight = () => { return sanitizeString(puzzleStore.guess) === sanitizeString(puzzleStore.puzzle.words[i].cardname) }

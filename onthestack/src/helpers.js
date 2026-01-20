@@ -8,12 +8,18 @@ export function shuffledClone(arr) {
   return copy;
 }
 
-export function sanitizeString(str) {
-  return str
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9]/gi, '')
-    // .replace(/[^a-z0-9 ]/gi, '') // Use this instead if we want to keep internal spaces.
+export function sanitizeString(str, keepSpaces=false) {
+  if ( keepSpaces ) {
+    return str
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9 ]/gi, '')
+  } else {
+    return str
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]/gi, '')
+  }
 }
 
 export function getFormattedDate(date = new Date()){
