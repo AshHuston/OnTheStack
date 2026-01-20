@@ -1,5 +1,5 @@
 {
-    "length": 6,
+    "length": 7,
     "puzzles": [
         {
             "length": null,
@@ -414,6 +414,75 @@
                 }
             ],
             "date": "Monday, January 19, 2026"
+        },
+        {
+            "length": null,
+            "words": [
+                {
+                    "isFirstWord": true,
+                    "isLastWord": false,
+                    "topConnector": "",
+                    "cardname": "powerbalance",
+                    "bottomConnector": "ance",
+                    "blankMap": "____________",
+                    "isSolved": true
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "ance",
+                    "cardname": "ancestral mask",
+                    "bottomConnector": "mask",
+                    "blankMap": "_________ ____",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "mask",
+                    "cardname": "mask of griselbrand",
+                    "bottomConnector": "and",
+                    "blankMap": "____ __ ___________",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "and",
+                    "cardname": "and they shall know no fear",
+                    "bottomConnector": "fear",
+                    "blankMap": "___ ____ _____ ____ __ ____",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "fear",
+                    "cardname": "fear of missing out",
+                    "bottomConnector": "out",
+                    "blankMap": "____ __ _______ ___",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": false,
+                    "topConnector": "out",
+                    "cardname": "outpost siege",
+                    "bottomConnector": "siege",
+                    "blankMap": "_______ _____",
+                    "isSolved": false
+                },
+                {
+                    "isFirstWord": false,
+                    "isLastWord": true,
+                    "topConnector": "siege",
+                    "cardname": "siege-gang commander",
+                    "bottomConnector": "",
+                    "blankMap": "_____-____ _________",
+                    "isSolved": false
+                }
+            ],
+            "date": "Tuesday, January 20, 2026"
         }
     ]
 }

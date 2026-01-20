@@ -18,10 +18,10 @@ export const useMetaStore = defineStore('meta', () => {
       media.addEventListener('change', update);
     };
 
-  return { 
+  return {
     isOnMobile,
     countdownToNextPuzzle,
     lastSolvedCard,
-    init 
+    init
   }
 })

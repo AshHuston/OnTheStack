@@ -3,30 +3,28 @@
 import { ref } from 'vue'
 import '@awesome.me/webawesome/dist/components/input/input.js';
 import '@awesome.me/webawesome/dist/components/checkbox/checkbox.js';
-
-const props = defineProps({
-  guess: String,
-  showCardSuggestions: {type: Boolean, default: false},
-})
+import { usePuzzleStore } from '@/stores/puzzle';
+import { useSettingsStore } from '@/stores/settings';
 
 const potentialCardNames = ref([])
 const isFocused = ref(false)
+const puzzleStore = usePuzzleStore()
+const settingsStore = useSettingsStore()
 
 async function updateList() {
-    const url = "https://api.scryfall.com/cards/autocomplete?q=" + props.guess
+    const url = "https://api.scryfall.com/cards/autocomplete?q=" + puzzleStore.guess
     const response = await fetch(url);
     const data = await response.json();
     potentialCardNames.value = data.data
 }
 
-const emit = defineEmits(['update:guess'])
 async function onInput(text) {
-    emit('update:guess', props.guess = text)
+    puzzleStore.guess = text
     await updateList()
 }
 
 async function onClickResult(text) {
-    emit('update:guess', props.guess = text);
+    puzzleStore.guess = text
     await updateList()
 }
 
@@ -35,16 +33,17 @@ async function onClickResult(text) {
 <template>
     <div class="container wa-stack">
         <wa-input
-            :value="props.guess"
+            :value="puzzleStore.guess"
             @input="e => onInput(e.target.value)"
             @focus="isFocused = true"
             @blur="isFocused = false"
             type="text"
             placeholder="Type here..."
+            with-clear
         />
 
         <!-- IMPROVE: This is not working right... I want to make it wait if theres already a call. TBD how to do that.  -->
-        <ul v-if="showCardSuggestions && isFocused" class="list">
+        <ul v-if="settingsStore.autoComplete && isFocused" class="list">
             <li
                 v-for="o in potentialCardNames"
                 :key="o"

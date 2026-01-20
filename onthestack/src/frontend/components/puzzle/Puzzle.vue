@@ -14,7 +14,6 @@ import CardImage from './CardImage.vue'
 const dailyPuzzle = ref(null)
 const doneLoading = ref(false)
 
-const guess = ref('')
 const contentScale = ref(1)
 const puzzleStore = usePuzzleStore()
 const settingsStore = useSettingsStore()
@@ -39,7 +38,7 @@ puzzleStore.initialize({
 
 const solvedStates = computed(() => {
     return puzzleStore.puzzle.words.map((word, i, arr) => {
-        const guessIsRight = () => { return sanitizeString(guess.value) === sanitizeString(puzzleStore.puzzle.words[i].cardname) }
+        const guessIsRight = () => { return sanitizeString(puzzleStore.guess) === sanitizeString(puzzleStore.puzzle.words[i].cardname) }
         const fullyHinted = () => { return puzzleStore.puzzle.words[i].cardname === puzzleStore.puzzle.words[i].blankMap }
         const prevSolved = i === 0 ? true : arr[i - 1].isSolved
         if (prevSolved && (guessIsRight() || fullyHinted()) ) { word.isSolved = true }
@@ -62,7 +61,7 @@ function updatePuzzle() {
     const nextCard = puzzleStore.puzzle.words[solvedStates.value.lastIndexOf(true)+1]
     if ( !lastSolvedWord.isLastWord && settingsStore.highlight ) {
         puzzleStore.updateBlankMap(solvedStates.value.lastIndexOf(true)+1)
-         guess.value = nextCard.blankMap.slice(0, (nextCard.blankMap.indexOf('_') === -1 ? nextCard.blankMap.length : nextCard.blankMap.indexOf('_')))
+         puzzleStore.guess = nextCard.blankMap.slice(0, (nextCard.blankMap.indexOf('_') === -1 ? nextCard.blankMap.length : nextCard.blankMap.indexOf('_')))
     }
 }
 
@@ -179,7 +178,7 @@ watch(currentlySolvingIndex, (newIndex) => {
                 <button v-if="settingsStore.showGeneratePuzzleButton === true" @click="newPuzzle(7)">Generate Puzzle</button>
                 <button type="button" @touchstart.prevent="giveHnt()">Hint</button>
             </div>
-            <cardGuessField v-model:guess="guess" :showCardSuggestions="settingsStore.autoComplete" />
+            <cardGuessField v-model:guess="puzzleStore.guess" :showCardSuggestions="settingsStore.autoComplete" />
             <div v-if="!metaStore.isOnMobile" class="wa-cluster">
                 <button v-if="settingsStore.showGeneratePuzzleButton === true" @click="newPuzzle(7)">Generate Puzzle</button>
                 <button @click="giveHnt()">Hint</button>
