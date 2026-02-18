@@ -19,4 +19,22 @@ export function startChronJobs(){
     cron.schedule('0 * * * *', async () => {
         console.log(getFormattedDate(), 'Server healthy')
     })
+
+    //This is a hacky addon for my nostalgiaBot because I don't want to pay top host it seperatly.
+    cron.schedule(
+        '30 10 * * *', 
+        () => {
+            console.log('Attempting nostalgiBot update.')
+            fetch("https://mtgtop8scraper.onrender.com/run-checks", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: "{}",
+            });
+        },
+        {
+            timezone: 'America/New_York'
+        }
+    )
 }
