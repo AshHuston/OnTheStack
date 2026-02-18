@@ -22,6 +22,18 @@ export function startChronJobs(){
 
     //This is a hacky addon for my nostalgiaBot because I don't want to pay top host it seperatly.
     cron.schedule(
+        '29 10 * * *', 
+        () => {
+            console.log('Attempting to wake up nostalgiBot.')
+            fetch("https://mtgtop8scraper.onrender.com/wake-up", {
+                method: "GET",
+                headers: { "Content-Type": "application/json", },
+            });
+        },
+        { timezone: 'America/New_York' }
+    )
+
+    cron.schedule(
         '30 10 * * *', 
         () => {
             console.log('Attempting nostalgiBot update.')
