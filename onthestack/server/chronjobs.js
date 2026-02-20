@@ -5,7 +5,7 @@ import { getFormattedDate, getFormattedTimeStamp } from './helpers.js'
 export function startChronJobs(){
     // Every day at 12:01am New York time
     cron.schedule(
-        '1 0 * * *', 
+        '1 0 * * *',
         () => {
             console.log('Attempting puzzle verification.', getFormattedTimeStamp(), 'dont forget to subtract 5hrs')
             ensureCurrentDatePuzzleInStore()
@@ -22,7 +22,7 @@ export function startChronJobs(){
 
     //This is a hacky addon for my nostalgiaBot because I don't want to pay top host it seperatly.
     cron.schedule(
-        '59 9 * * *', 
+        '55 9 * * *',
         () => {
             console.log('Attempting to wake up nostalgiBot.')
             fetch("https://mtgtop8scraper.onrender.com/wake-up", {
@@ -34,7 +34,7 @@ export function startChronJobs(){
     )
 
     cron.schedule(
-        '0 10 * * *', 
+        '0 10 * * *',
         () => {
             console.log('Attempting nostalgiBot update.')
             fetch("https://mtgtop8scraper.onrender.com/run-checks", {
