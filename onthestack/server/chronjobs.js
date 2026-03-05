@@ -29,6 +29,11 @@ export function startChronJobs(){
                 method: "GET",
                 headers: { "Content-Type": "application/json", },
             });
+            console.log('Attempting to wake up streamPokemonParty.')
+            fetch("https://streampokemonparty.onrender.com/wake-up", {
+                method: "GET",
+                headers: { "Content-Type": "application/json", },
+            });
         },
         { timezone: 'America/New_York' }
     )
